@@ -139,7 +139,45 @@ dialog.mini{height:fit-content;max-width:440px;width:calc(100% - 32px);border-ra
 .choices .btn{width:100%}
 #invWhat{margin:10px 0 0;font-weight:500}
 .linkbtn{display:inline-block;margin-top:10px;color:var(--gold);font-weight:500;text-decoration:underline;text-underline-offset:3px;padding:8px 0}
+.iconbtn{background:none;border:1px solid var(--line);border-radius:999px;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0;font-size:22px;line-height:1}
+.iconbtn svg{width:20px;height:20px}
+.setrow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.setrow select{width:auto;min-width:120px;height:42px}
+.next{border:1px solid var(--gold);border-radius:6px;padding:16px;margin:14px 0 18px}
+.next-name{font-family:var(--display);font-style:italic;font-weight:500;font-size:28px;line-height:1.1;margin:4px 0 0}
+.next-time{font-family:var(--display);font-weight:600;font-size:24px;color:var(--gold);margin:2px 0 4px}
+.next .count{font-size:17px}
+.next-acts{display:flex;gap:8px;margin-top:12px}
+.next-acts .btn{flex:1}
+.folds{margin-top:18px;border-bottom:1px solid var(--line)}
+.fold{border-top:1px solid var(--line)}
+.fold summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;min-height:52px;font-family:var(--display);font-weight:600;font-size:22px;cursor:pointer}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::after{content:"+";font-family:var(--sans);font-weight:400;font-size:24px;color:var(--gold);flex-shrink:0}
+.fold[open] summary::after{content:"\2013"}
+.fold-body{padding:0 0 16px}
+.fold-body ol{margin:0;padding-left:24px}
+.fold-body ol li{margin-bottom:9px}
+.fold-body ol li::marker{color:var(--gold);font-weight:600}
+.fold-body p{margin:0 0 8px}
+#plans li.prow-li{align-items:flex-start}
+.prow{flex:1;min-width:0;text-align:left;background:none;border:0;padding:0;color:inherit}
+.prow .sub{display:block}
+#plans .acts{flex-basis:100%}
+.btn.danger{color:var(--live)}
+#dropDlg{height:100%;max-height:100%;width:100%;max-width:100%;margin:0;border-radius:0;background:var(--bg)}
+.drop{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(env(safe-area-inset-top,0px) + 24px) 24px calc(env(safe-area-inset-bottom,0px) + 24px);position:relative}
+.drop .close{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);right:16px}
+.drop-clock{font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums;font-size:clamp(84px,30vw,160px);line-height:1;margin:8px 0 12px;letter-spacing:-.02em}
+.drop-name{font-family:var(--display);font-style:italic;font-weight:500;font-size:34px;line-height:1.1;margin:0}
+.drop-go{width:100%;max-width:420px;min-height:64px;font-size:19px;margin:24px 0 10px}
+.drop.live .drop-clock{color:var(--live)}
 .calset{display:flex;align-items:center;gap:10px;margin-top:28px}
+input[type=number]{display:block;width:100%;height:48px;margin:0;font:inherit;font-size:16px;color:var(--ink);background-color:var(--field);border:1px solid var(--line);border-radius:10px;padding:0 14px;-webkit-appearance:none;appearance:none}
+textarea.code{display:block;width:100%;min-height:96px;font:13px/1.4 ui-monospace,Menlo,monospace;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:10px;resize:vertical}
+.setblock{padding:14px 0;border-bottom:1px solid var(--line)}
+.setblock .choices{margin-top:10px}
+.linkbtn.fix{margin-top:4px;font-size:14px;background:none;border:0;padding:8px 0;font-family:inherit;cursor:pointer}
 .calset label{font-size:14px;color:var(--muted)}
 .calset select{width:auto;min-width:150px;height:42px}
 .tabs{grid-template-columns:repeat(3,1fr)}
@@ -190,10 +228,12 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
 <main class="wrap">
   <header class="top">
     <h1 class="brand"><svg class="mono" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="24" cy="24" r="19.5" fill="none" stroke="currentColor" stroke-width=".6" opacity=".55"/><text x="24" y="30.5" text-anchor="middle" font-family="Cormorant Garamond, Garamond, Times New Roman, serif" font-style="italic" font-weight="600" font-size="19" fill="currentColor">JL</text></svg>JLResy</h1>
-    <button class="btn quiet sm" id="pingBtn" type="button">Turn on pings</button>
+    <button class="iconbtn" id="setBtn" type="button" aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
   </header>
   <p class="lede">New York’s hardest tables, on your terms.</p>
   <p class="sublede">Pick a restaurant and the night you want. You’ll see the exact moment tables open, how to book, and get a calendar invite that alerts you 15 minutes before.</p>
+
+  <div class="next" id="nextCard" hidden></div>
 
   <div class="tabs" role="tablist">
     <button type="button" role="tab" id="tabD" aria-selected="true" aria-controls="panelD">Drops</button>
@@ -205,9 +245,9 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     <div class="remind" id="remindD" hidden></div>
     <div class="filters">
       <select id="platD" aria-label="Platform"><option value="">All platforms</option></select>
-      <select id="mineD" aria-label="Which restaurants"><option value="">All restaurants</option><option value="fav">My favorites</option><option value="planned">Ones I’ve planned</option></select>
+      <select id="mineD" aria-label="Which restaurants"><option value="mine">Favorites and plans</option><option value="">All restaurants</option><option value="fav">My favorites</option><option value="planned">Ones I’ve planned</option></select>
     </div>
-    <p class="dnote">Every drop in the next 24 hours, plus monthly drops in the next 7 days. Daily drops repeat at the same time every day. Tap one to plan it.</p>
+    <p class="dnote">Drops in the next 24 hours, plus monthly drops this week. Tap one to plan it.</p>
     <div id="drops"></div>
     <p class="empty" id="noDrops" hidden>No drops match these filters.</p>
   </section>
@@ -231,8 +271,6 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     <p class="empty" id="noPlans">No plans yet. Pick a restaurant, choose a night, and save the plan to get pinged before tables open.</p>
   </section>
 
-  <div class="calset"><label for="calPref">Calendar</label><select id="calPref"><option value="apple">Apple</option><option value="google">Google</option><option value="ask">Ask me</option></select></div>
-  <p class="foot">Schedules compiled October 28, 2026 from SnagRes, The Infatuation and Resy. Restaurants change their rules, so check the booking page if a time looks off. Pings work while this page is open. Add plans to your calendar to get alerts when it’s closed. Your plans and favorites are saved in this browser, so plan on the phone where you want the alerts.</p>
 </main>
 
 <dialog id="dlg" aria-labelledby="dlgName">
@@ -286,6 +324,64 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   </div>
 </dialog>
 
+<dialog id="setDlg" class="mini" aria-labelledby="setTitle">
+  <div class="mini-body">
+    <h3 id="setTitle">Settings</h3>
+    <div class="setrow"><div><strong>Calendar</strong><p class="note" style="margin:2px 0 0">Where “Save and add to calendar” sends your alerts.</p></div><select id="calPref"><option value="apple">Apple</option><option value="google">Google</option><option value="ask">Ask me</option></select></div>
+    <div class="setrow"><div><strong>In-page pings</strong><p class="note" style="margin:2px 0 0">A chime and banner 15 minutes before, while JLResy is open.</p></div><button class="btn quiet sm" id="pingBtn" type="button">Turn on pings</button></div>
+    <p class="note" style="margin-top:14px">Schedules compiled October 28, 2026 from SnagRes, The Infatuation and Resy. Restaurants change their rules, so check the booking page if a time looks off. Pings work while this page is open. Add plans to your calendar to get alerts when it’s closed. Your plans and favorites are saved in this browser, so plan on the phone where you want the alerts.</p>
+    <div class="setblock"><strong>Back up your plans</strong><p class="note" style="margin:2px 0 0">Save a copy, or move your plans and favorites between Safari, the Home Screen app and a new web address.</p>
+      <div class="choices"><button class="btn" type="button" id="expFile">Save backup file</button><button class="btn" type="button" id="expCopy">Copy backup code</button><button class="btn" type="button" id="impOpen">Restore from a backup</button></div>
+      <p class="ok" id="bkOk" role="status" hidden></p>
+    </div>
+    <button class="btn" type="button" id="setClose" style="width:100%;margin-top:14px">Done</button>
+  </div>
+</dialog>
+
+<dialog id="impDlg" class="mini" aria-labelledby="impTitle">
+  <div class="mini-body">
+    <h3 id="impTitle">Restore from a backup</h3>
+    <p class="hint">Paste a backup code, or choose a backup file. Plans and favorites are added to what you already have. Nothing is deleted.</p>
+    <textarea class="code" id="impText" placeholder="Paste your backup code here" aria-label="Backup code"></textarea>
+    <label class="field"><span>Or choose a backup file</span><input type="file" id="impFile" accept=".json,application/json,text/plain"></label>
+    <p class="err" id="impErr" hidden></p>
+    <div class="choices"><button class="btn solid" type="button" id="impGo">Restore</button><button class="btn" type="button" id="impCancel">Cancel</button></div>
+  </div>
+</dialog>
+
+<dialog id="fixDlg" class="mini" aria-labelledby="fixTitle">
+  <div class="mini-body">
+    <h3 id="fixTitle">Fix this schedule</h3>
+    <p class="hint" id="fixWhat"></p>
+    <label class="field"><span>Release time (leave blank if you don’t know)</span><input type="time" id="fixTime" step="300"></label>
+    <label class="field" id="fixDaysWrap"><span>How many days before the dinner date it opens</span><input type="number" id="fixDays" min="0" max="400" inputmode="numeric"></label>
+    <label class="field" id="fixDomWrap" hidden><span>Day of the month it releases</span><input type="number" id="fixDom" min="1" max="31" inputmode="numeric"></label>
+    <p class="err" id="fixErr" hidden></p>
+    <div class="choices"><button class="btn solid" type="button" id="fixSave">Save my fix</button><button class="btn" type="button" id="fixReset">Reset to original</button><button class="btn" type="button" id="fixCancel">Cancel</button></div>
+  </div>
+</dialog>
+
+<dialog id="menuDlg" class="mini" aria-labelledby="menuTitle">
+  <div class="mini-body">
+    <h3 id="menuTitle"></h3>
+    <p class="hint" id="menuWhat"></p>
+    <div class="choices" id="menuBtns"></div>
+    <button class="btn" type="button" id="menuClose" style="width:100%;margin-top:8px">Cancel</button>
+  </div>
+</dialog>
+
+<dialog id="dropDlg" aria-labelledby="dropName">
+  <div class="drop">
+    <button class="close" type="button" id="dropClose" aria-label="Close drop mode">×</button>
+    <p class="opens-label" id="dropLabel">Tables open in</p>
+    <p class="drop-clock" id="dropClock" role="timer">2:00</p>
+    <p class="drop-name" id="dropName"></p>
+    <p class="note" id="dropFor"></p>
+    <a class="btn solid drop-go" id="dropGo" target="_blank" rel="noopener noreferrer">Open Resy</a>
+    <p class="note" id="dropTip"></p>
+  </div>
+</dialog>
+
 <dialog id="gotDlg" class="mini" aria-labelledby="gotTitle">
   <div class="mini-body">
     <h3 id="gotTitle">Nice, you got it</h3>
@@ -325,6 +421,22 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
 
   let plans = lsGet(LS_PLANS, []);
   let settings = lsGet(LS_SET, {fav: []}); if(!Array.isArray(settings.fav)) settings.fav = [];
+  if(!settings.ov || typeof settings.ov !== "object") settings.ov = {};
+  const ORIG = {};
+  DATA.forEach(R => { ORIG[R.id] = {t: R.t, a: R.a, d: R.d, r: R.r, c: R.c}; });
+  // Your own schedule fixes sit on top of the compiled data and can be reset.
+  function applyOverrides(){
+    DATA.forEach(R => {
+      Object.assign(R, ORIG[R.id]); delete R.fixedOn;
+      const o = settings.ov[R.id]; if(!o) return;
+      R.t = o.t || undefined;
+      if(o.r) R.r = o.r;
+      if(o.a != null) R.a = o.a;
+      if(o.d != null) R.d = o.d;
+      R.c = "high"; R.fixedOn = o.on;
+    });
+  }
+  applyOverrides();
   let setRef = null;
   let fired = lsGet(LS_FIRED, {});
   let pingsWanted = lsGet(LS_PINGS, false);
@@ -433,7 +545,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
       const mt = metaText(R);
       return '<li' + (hot ? ' class="hot"' : '') + '>' + starBtn(R) + '<div class="info"><div class="line"><span class="rname">' + esc(R.n) + '</span><span class="leader" aria-hidden="true"></span></div>' +
         (mt ? '<div class="sub">' + esc(mt) + '</div>' : '') +
-        '<div class="sub">' + esc(R.p) + ', ' + esc(ruleText(R)) + (R.c === "low" ? ' <span class="flag">(unconfirmed)</span>' : '') + '</div>' + badge + '</div>' +
+        '<div class="sub">' + esc(R.p) + ', ' + esc(ruleText(R)) + (R.fixedOn ? ' <span class="flag">(your fix)</span>' : R.c === "low" ? ' <span class="flag">(unconfirmed)</span>' : '') + '</div>' + badge + '</div>' +
         '<button class="btn sm" type="button" data-plan="' + esc(R.id) + '" aria-label="Plan a booking at ' + esc(R.n) + '">Plan</button></li>';
     }).join("");
   }
@@ -492,7 +604,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const R = current; if(!R) return;
     const P = computePlan(R, $("#pDate").value, $("#pTime").value || "19:30", +$("#pParty").value || 2);
     const card = $("#card"), save = $("#saveBtn"), calBtn = $("#calBtn");
-    if(P.error){ card.className = "card"; card.innerHTML = '<p class="err">' + esc(P.error) + '</p>' + (P.noRule && P.date ? bookHtml(R, P) : ''); save.disabled = true; calBtn.hidden = true; cardPlan = null; return; }
+    if(P.error){ card.className = "card"; card.innerHTML = '<p class="err">' + esc(P.error) + '</p>' + (P.noRule && P.date ? bookHtml(R, P) : '') + '<button class="linkbtn fix" type="button" data-act="fix">Know when it opens? Add it</button>'; save.disabled = true; calBtn.hidden = true; cardPlan = null; return; }
     const url = safeUrl(R.u || "");
     const dropDay = fCalLong.format(calDate(P.drop.cal));
     let head;
@@ -524,9 +636,18 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     backupLines.push("Cancellations reappear most often a day or two before " + dateStrLabel(P.date) + ", so check again then.");
     if(R.p === "Resy") backupLines.push("Set a Resy Notify for the date if you haven’t.");
     const backup = '<div class="sec"><h3>' + (P.state === "past" ? "Backup plan" : "If you miss it") + '</h3>' + backupLines.map(b => '<p>' + esc(b) + '</p>').join("") + '</div>';
-    const srcs = '<div class="sec srcs">Confidence: ' + esc(R.c) + '. Sources: ' + R.s.map(i => '<a href="' + esc(SRC[i][1]) + '" target="_blank" rel="noopener noreferrer">' + esc(SRC[i][0]) + '</a>').join(", ") + '.</div>';
+    const srcs = '<div class="sec srcs">' + (R.fixedOn ? 'Schedule updated by you on ' + esc(new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric",year:"numeric"}).format(new Date(R.fixedOn))) + '. Original sources: ' : 'Confidence: ' + esc(R.c) + '. Sources: ') + R.s.map(i => '<a href="' + esc(SRC[i][1]) + '" target="_blank" rel="noopener noreferrer">' + esc(SRC[i][0]) + '</a>').join(", ") + '.</div>';
     card.className = "card" + (P.state === "past" ? " past" : "");
-    card.innerHTML = '<div class="ticket">' + head + facts + '</div>' + bookHtml(R, P) + warns + prepHtml(P) + steps + backupsHtml(P) + backup + '<button class="btn bigbtn" type="button" data-act="share">Share this plan with friends</button>' + srcs;
+    const fold = (id, html, title) => {
+      if(!html) return "";
+      const m = /^<div class="sec"><h3>([\s\S]*?)<\/h3>([\s\S]*)<\/div>$/.exec(html);
+      const t = m ? m[1] : title, body = m ? m[2] : html;
+      const open = openFolds.has(id) || (P.state === "past" && (id === "backups" || id === "miss"));
+      return '<details class="fold" data-fold="' + id + '"' + (open ? ' open' : '') + '><summary>' + t + '</summary><div class="fold-body">' + body + '</div></details>';
+    };
+    card.innerHTML = '<div class="ticket">' + head + facts + '</div>' + bookHtml(R, P) + '<button class="linkbtn fix" type="button" data-act="fix">This time is wrong? Fix it</button>' + warns +
+      '<div class="folds">' + fold("prep", prepHtml(P)) + fold("steps", steps) + fold("backups", backupsHtml(P)) + fold("miss", backup) +
+      fold("more", '<button class="btn bigbtn" type="button" data-act="share" style="margin-top:0">Share this plan with friends</button>' + srcs, "Share and sources") + '</div>';
     save.disabled = P.state === "past";
     save.textContent = calOk(P) ? (editingPlanId ? "Update and add to calendar" : "Save and add to calendar") : (editingPlanId ? "Update plan" : "Save plan");
     cardPlan = P;
@@ -592,9 +713,9 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   }
   function dropEvent(P){
     const p = plans.find(x => x.rid === P.R.id && x.date === P.date), L = bookLink(P.R, P.date, P.party);
-    return {uid: (p ? p.id : P.R.id + "-" + P.date) + "@jlresy", seq: p ? (p.seq || 0) : 0, start: P.drop.at, end: P.drop.at + LEAD,
+    return {uid: (p ? p.id : P.R.id + "-" + P.date) + "@jlresy", seq: (p ? (p.seq || 0) : 0) + 1, start: P.drop.at, end: P.drop.at + LEAD,
       title: P.R.n + " reservations open", location: P.R.p, url: L && !L.phone ? L.href : "", details: eventDetails(P),
-      alarms: [{rel: "-PT15M", text: P.R.n + " opens in 15 min"}, {rel: "PT0M", text: P.R.n + " is open now"}]};
+      alarms: [{rel: "-PT15M", text: P.R.n + " opens in 15 min"}, {rel: "-PT5M", text: P.R.n + " opens in 5 min. Open " + P.R.p + " now."}, {rel: "PT0M", text: P.R.n + " is open now"}]};
   }
   const UA = navigator.userAgent || "";
   const isIOS = /iP(hone|ad|od)/.test(UA) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
@@ -632,7 +753,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   function downloadDrops(list){
     const one = list.length === 1;
     downloadEvents(list.map(dropEvent), one ? list[0].R.id + "-" + list[0].date + ".ics" : "jlresy-plans.ics",
-      one ? "Check that the event shows " + fShort.format(list[0].drop.at) + ", with alerts 15 minutes before and at the drop." : "Each event has alerts 15 minutes before and at the drop.");
+      one ? "Check that the event shows " + fShort.format(list[0].drop.at) + ", with alerts 15 and 5 minutes before, and at the drop." : "Each event has alerts 15 and 5 minutes before, and at the drop.");
     markCal(list);
   }
   function openCalendar(list, saved, appleOnly){
@@ -687,14 +808,14 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     calList = list;
     showConfirm(saved ? "Plan saved" : "Add to calendar",
       r.blocked ? "Your phone blocked the calendar. Tap here to add it."
-        : one ? "Added? Your alert is set for " + fShort.format(P.pingAt) + "." : "Added? Each drop has an alert 15 minutes before and another when tables open.",
+        : one ? "Added? Alerts at " + fTime.format(P.pingAt) + " and " + fTime.format(P.drop.at - 5*60000) + ", plus one when tables open." : "Added? Each drop has alerts 15 and 5 minutes before, plus one when tables open.",
       one ? P : null, r.blocked);
   }
   function googleAdd(P, saved){
     window.open(googleUrl(P), "_blank");
     lastCal = {kind: "google", list: [P], saved};
     calList = [P];
-    showConfirm(saved ? "Plan saved" : "Add to calendar", "Added? In Google Calendar, check the event starts at " + fShort.format(P.pingAt) + ", then tap Save.", null, false);
+    showConfirm(saved ? "Plan saved" : "Add to calendar", "Added? In Google Calendar, check the event starts at " + fShort.format(P.pingAt) + ", then tap Save. Google uses your default alert, so set it to 15 and 5 minutes in Google Calendar.", null, false);
   }
   // Everywhere a calendar is offered goes through here, so the setting is respected.
   function addToCalendar(list, saved){
@@ -774,8 +895,9 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   function renderDrops(){
     const plat = $("#platD").value, mine = $("#mineD").value;
     const planned = new Set(plans.map(p => p.rid));
-    const list = upcomingDrops(7).filter(x => (!plat || x.R.p === plat) && (mine !== "planned" || planned.has(x.R.id)) && (mine !== "fav" || isFav(x.R.id)));
+    const list = upcomingDrops(7).filter(x => (!plat || x.R.p === plat) && (mine !== "planned" || planned.has(x.R.id)) && (mine !== "fav" || isFav(x.R.id)) && (mine !== "mine" || isFav(x.R.id) || planned.has(x.R.id)));
     $("#noDrops").hidden = !!list.length;
+    $("#noDrops").textContent = mine === "mine" ? "None of your favorites or plans drop this week. Choose All restaurants to see every drop." : "No drops match these filters.";
     const groups = [];
     for(const x of list){ const g = groups[groups.length - 1]; if(g && g.at === x.at) g.items.push(x); else groups.push({at: x.at, items: [x]}); }
     const now = Date.now();
@@ -794,7 +916,8 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   }
   function renderRemind(){
     const n = needsReminder().length;
-    ["#remindD","#remindP"].forEach(sel => {
+    $("#remindD").hidden = true; // the Next drop card already flags this on the home screen
+    ["#remindP"].forEach(sel => {
       const el = $(sel); el.hidden = !n;
       if(n) el.innerHTML = '<p><strong>' + (n === 1 ? "1 saved plan has" : n + " saved plans have") + ' no calendar reminder yet.</strong> Pings only work while this page is open, so a calendar alert is the safest way not to miss a drop.</p><button class="btn solid sm" type="button" data-act="remindAll">Download ' + (n === 1 ? "the calendar invite" : "all calendar invites") + '</button>';
     });
@@ -876,13 +999,163 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
       '<button class="btn sm" type="button" data-plan="' + esc(x.R.id) + '" data-date="' + P.date + '" data-time="' + P.time + '" data-party="' + P.party + '">Plan</button></li>').join("") + '</ul></div>';
   }
 
+  /* ---------- Backup and restore ---------- */
+  function backupObj(){ return {app: "jlresy", version: 1, exported: new Date().toISOString(), plans, favorites: settings.fav, fixes: settings.ov}; }
+  function bkMsg(t){ const el = $("#bkOk"); el.textContent = t; el.hidden = false; }
+  async function exportFile(){
+    const text = JSON.stringify(backupObj(), null, 1), t = todayNY();
+    const name = "jlresy-backup-" + iso(cal(t.y,t.m,t.d,0)) + ".json";
+    try{
+      const file = new File([text], name, {type: "application/json"});
+      if(navigator.canShare && navigator.canShare({files: [file]})){ await navigator.share({files: [file], title: "JLResy backup"}); bkMsg("Backup ready. Choose Save to Files to keep it."); return; }
+    }catch(e){ if(e && e.name === "AbortError") return; }
+    try{
+      const url = URL.createObjectURL(new Blob([text], {type: "application/json"}));
+      const a = document.createElement("a"); a.href = url; a.download = name; a.style.display = "none";
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 60000);
+      bkMsg("Backup saved as " + name + ". Find it in your Downloads.");
+    }catch(e){ bkMsg("Couldn’t save a file here. Use Copy backup code instead."); }
+  }
+  async function exportCopy(){
+    const text = JSON.stringify(backupObj());
+    let ok = false;
+    try{ await navigator.clipboard.writeText(text); ok = true; }catch(e){}
+    bkMsg(ok ? "Backup code copied (" + plans.length + (plans.length === 1 ? " plan" : " plans") + "). Open JLResy where you want them, go to Settings, Restore from a backup, and paste." : "Couldn’t copy automatically. Use Save backup file instead.");
+  }
+  function restore(text){
+    let data;
+    try{ data = JSON.parse(text); }catch(e){ return "That doesn’t look like a JLResy backup. Paste the whole code, starting with { and ending with }."; }
+    if(!data || data.app !== "jlresy" || !Array.isArray(data.plans)) return "That doesn’t look like a JLResy backup.";
+    let added = 0, updated = 0, skipped = 0, favs = 0;
+    for(const p of data.plans){
+      if(!p || typeof p.id !== "string" || !byId[p.rid] || !/^\d{4}-\d{2}-\d{2}$/.test(p.date || "")){ skipped++; continue; }
+      const i = plans.findIndex(x => x.id === p.id);
+      if(i < 0){ plans.push(p); added++; }
+      else if((p.seq || 0) > (plans[i].seq || 0) || (p.status && !plans[i].status)){ plans[i] = p; updated++; }
+      else skipped++;
+    }
+    for(const f of (Array.isArray(data.favorites) ? data.favorites : [])) if(byId[f] && !settings.fav.includes(f)){ settings.fav.push(f); favs++; }
+    for(const [id, o] of Object.entries(data.fixes || {})) if(byId[id] && o && (!settings.ov[id] || (o.on || 0) > (settings.ov[id].on || 0))) settings.ov[id] = o;
+    savePlansLocal(); lsSet(LS_SET, settings); applyOverrides(); renderPlans();
+    return {added, updated, skipped, favs};
+  }
+  function openImport(){
+    $("#impText").value = ""; $("#impFile").value = ""; $("#impErr").hidden = true;
+    const d = $("#impDlg"); if(!d.open){ if(typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+  }
+
+  /* ---------- Fix a schedule ---------- */
+  let fixR = null;
+  function openFix(R){
+    fixR = R;
+    const daysRule = R.r === "days" || R.r === "none", monthly = R.r === "monthly";
+    $("#fixWhat").textContent = R.n + ": " + R.p + ", " + ruleText(R) + ". Your fix applies only to your JLResy and you can undo it.";
+    $("#fixTime").value = R.t || "";
+    $("#fixDaysWrap").hidden = !daysRule; $("#fixDays").value = R.r === "days" ? (R.a ?? "") : "";
+    $("#fixDomWrap").hidden = !monthly; $("#fixDom").value = monthly ? (R.d || 1) : "";
+    $("#fixReset").hidden = !settings.ov[R.id];
+    $("#fixErr").hidden = true;
+    const d = $("#fixDlg"); if(!d.open){ if(typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+  }
+  function afterFix(){
+    applyOverrides(); renderPlans();
+    if($("#dlg").open && current){ $("#dlgRule").textContent = (metaText(current) ? metaText(current) + ". " : "") + current.p + ", " + ruleText(current); renderCard(); }
+  }
+
+  /* ---------- Next drop, drop mode, menus ---------- */
+  const openFolds = new Set();
+  function soonestOpenDate(R){
+    if(R.r === "none") return nextSaturday();
+    const t = todayNY(), now = Date.now();
+    for(let i = 0; i < 200; i++){
+      const c = cal(t.y,t.m,t.d,i), ds = iso(c);
+      if(R.od && !R.od.includes(c.wd)) continue;
+      const d = dropFor(R, ds);
+      if(d.at != null ? d.at > now : d.dayStart > now) return ds;
+    }
+    return nextSaturday();
+  }
+  function renderNext(){
+    const now = Date.now();
+    $(".lede").hidden = plans.length > 0; $(".sublede").hidden = plans.length > 0;
+    const ups = plans.filter(p => !p.status && byId[p.rid]).map(p => ({p, R: byId[p.rid], d: planDrop(p)}))
+      .filter(x => x.d && x.d.at != null && x.d.at + 60000 > now).sort((a,b) => a.d.at - b.d.at);
+    const el = $("#nextCard");
+    if(!ups.length){ el.hidden = true; el.innerHTML = ""; return; }
+    const {p, R, d} = ups[0], L = bookLink(R, p.date, p.party), soon = d.at - now <= 15*60000;
+    el.hidden = false;
+    el.innerHTML = '<p class="opens-label">Your next drop</p><p class="next-name">' + esc(R.n) + '</p>' +
+      '<p class="next-time">' + esc(fShort.format(d.at)) + '</p>' +
+      '<p class="count" data-at="' + d.at + '">' + esc(rel(d.at - now)) + '</p>' +
+      '<p class="note">For ' + esc(dateStrLabel(p.date)) + ' at ' + esc(clockLabel(p.time)) + ', party of ' + p.party + '.' + (p.cal ? '' : ' <span class="flag">No calendar reminder yet.</span>') + '</p>' +
+      '<div class="next-acts">' + (soon ? '<button class="btn solid" type="button" data-drop="' + esc(p.id) + '">Open drop mode</button>'
+        : (L ? '<a class="btn solid" href="' + esc(L.href) + '"' + (L.phone ? '' : ' target="_blank" rel="noopener noreferrer"') + '>' + esc(L.phone ? L.label : "Open " + R.p) + '</a>' : '')) +
+      '<button class="btn" type="button" data-pact="open" data-id="' + esc(p.id) + '">View plan</button></div>';
+  }
+  function openMenu(id){
+    const p = plans.find(x => x.id === id); if(!p) return;
+    const R = byId[p.rid]; if(!R) return;
+    const d = planDrop(p), k = planStat(p, d, Date.now()), items = [];
+    if(k === "upcoming"){ items.push(["open", "Open plan"]); if(d.at != null) items.push(["cal", "Add to calendar"]); items.push(["share", "Share"]); }
+    else if(k === "opened") items.push(["open", "Open plan"], ["got", "I got it"], ["miss", "Didn’t get it"]);
+    else if(k === "booked") items.push(["remind", "Add to calendar"], ["edit", "Edit booking"], ["share", "Share"]);
+    else items.push(["again", "Try another night"]);
+    items.push(["del", "Remove plan"]);
+    $("#menuTitle").textContent = R.n;
+    $("#menuWhat").textContent = dateStrLabel(p.date) + ", " + clockLabel(p.time) + ", party of " + p.party + ".";
+    $("#menuBtns").innerHTML = items.map(([a, l]) => '<button class="btn' + (a === "del" ? ' danger' : '') + '" type="button" data-pact="' + a + '" data-id="' + esc(id) + '">' + l + '</button>').join("");
+    const m = $("#menuDlg"); if(!m.open){ if(typeof m.showModal === "function") m.showModal(); else m.setAttribute("open",""); }
+  }
+  let dropPlanId = null, wakeLock = null;
+  const dropSeen = new Set();
+  function clockText(ms){ const sec = Math.max(0, Math.ceil(ms/1000)), m = Math.floor(sec/60); return m >= 60 ? Math.floor(m/60) + "h " + (m%60) + "m" : m + ":" + String(sec%60).padStart(2,"0"); }
+  function openDropMode(id){
+    const p = plans.find(x => x.id === id); if(!p) return;
+    const R = byId[p.rid]; if(!R) return;
+    const d = planDrop(p); if(!d || d.at == null) return;
+    dropPlanId = id; dropSeen.add(id + "|" + d.at);
+    const L = bookLink(R, p.date, p.party), go = $("#dropGo");
+    $("#dropName").textContent = R.n;
+    $("#dropFor").textContent = dateStrLabel(p.date) + " at " + clockLabel(p.time) + ", party of " + p.party + ". Drops at " + fTime.format(d.at) + ".";
+    if(L){ go.hidden = false; go.href = L.href; go.textContent = L.phone ? L.label : "Open " + R.p + (L.filled ? " for " + dateStrLabel(p.date) : ""); if(L.phone) go.removeAttribute("target"); else go.target = "_blank"; }
+    else go.hidden = true;
+    ["#dlg","#invDlg","#menuDlg","#setDlg","#gotDlg"].forEach(sel => { const x = $(sel); if(x && x.open) x.close(); });
+    const dd = $("#dropDlg"); if(!dd.open){ if(typeof dd.showModal === "function") dd.showModal(); else dd.setAttribute("open",""); }
+    updateDropMode();
+    try{ if(navigator.wakeLock) navigator.wakeLock.request("screen").then(l => { wakeLock = l; }).catch(() => {}); }catch(e){}
+  }
+  function updateDropMode(){
+    if(!$("#dropDlg").open || !dropPlanId) return;
+    const p = plans.find(x => x.id === dropPlanId), d = p && planDrop(p); if(!d) return;
+    const ms = d.at - Date.now(), live = ms <= 0;
+    $(".drop").classList.toggle("live", live);
+    $("#dropLabel").textContent = live ? "Tables are open" : "Tables open in";
+    $("#dropClock").textContent = live ? "Now" : clockText(ms);
+    $("#dropTip").textContent = live ? "Grab the first slot near your time. You can swap later if a better one opens." : "Be signed in with a card saved. Refresh right at the drop.";
+  }
+  function closeDropMode(){
+    const dd = $("#dropDlg"); if(dd.open) dd.close();
+    dropPlanId = null;
+    try{ if(wakeLock) wakeLock.release(); }catch(e){}
+    wakeLock = null;
+  }
+  function checkDropMode(now){
+    if($("#dropDlg").open) return updateDropMode();
+    for(const p of plans){
+      if(p.status) continue;
+      const d = planDrop(p); if(!d || d.at == null) continue;
+      if(d.at - now <= 120000 && now < d.at + 60000 && !dropSeen.has(p.id + "|" + d.at)){ openDropMode(p.id); break; }
+    }
+  }
+
   function openPlanner(R, plan, date, time, party){
+    if(current !== R) openFolds.clear();
     current = R; editingPlanId = plan ? plan.id : null;
     $("#dlgName").textContent = R.n;
     $("#dlgRule").textContent = (metaText(R) ? metaText(R) + ". " : "") + R.p + ", " + ruleText(R);
     const t = todayNY();
     $("#pDate").min = iso(cal(t.y,t.m,t.d,0));
-    $("#pDate").value = plan ? plan.date : (date || nextSaturday());
+    $("#pDate").value = plan ? plan.date : (date || soonestOpenDate(R));
     $("#pTime").value = plan ? plan.time : (time || "19:30");
     $("#pParty").value = String(plan ? plan.party : (party || 2));
     updateDlgStar();
@@ -900,28 +1173,29 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   }
   function nyLocal(str){ const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(str || ""); return m ? zoned(+m[1],+m[2],+m[3],+m[4],+m[5]) : null; }
   function planRow(x, k, now){
-    const {p, R, d} = x;
-    const btn = (act, label, cls) => '<button class="btn ' + (cls || "quiet") + ' sm" type="button" data-pact="' + act + '" data-id="' + esc(p.id) + '">' + label + '</button>';
-    let sub, acts;
+    const {p, R, d} = x, id = esc(p.id), opensTxt = d.at != null ? fShort.format(d.at) : fCal.format(calDate(d.cal));
+    let sub, tap, extra = "";
     if(k === "upcoming"){
-      sub = esc(clockLabel(p.time) + ', party of ' + p.party + '. ' + (d.at != null ? 'Opens ' + fShort.format(d.at) + '.' : 'Opens ' + fCal.format(calDate(d.cal)) + ', time not published.')) +
+      sub = esc(clockLabel(p.time) + ', party of ' + p.party + '. Opens ' + opensTxt + (d.at != null ? '.' : ', time not published.')) +
         (d.at != null ? ' <span class="flag" data-at="' + d.at + '">' + esc(rel(d.at - now)) + '</span>' : '') +
         (d.at != null && !p.cal ? '<br><span class="flag">No calendar reminder yet</span>' : '');
-      acts = btn("open", "Open", "") + (d.at != null ? btn("cal", "Add to calendar") : '') + btn("share", "Share") + btn("del", "Remove");
+      tap = "open";
     } else if(k === "opened"){
-      sub = esc(clockLabel(p.time) + ', party of ' + p.party + '. Tables opened ' + (d.at != null ? fShort.format(d.at) : fCal.format(calDate(d.cal))) + '.');
-      acts = btn("got", "I got it", "solid") + btn("miss", "Didn’t get it") + btn("open", "Open");
+      sub = esc(clockLabel(p.time) + ', party of ' + p.party + '. Tables opened ' + opensTxt + '.');
+      tap = "open";
+      extra = '<div class="acts"><button class="btn solid sm" type="button" data-pact="got" data-id="' + id + '">I got it</button><button class="btn quiet sm" type="button" data-pact="miss" data-id="' + id + '">Didn’t get it</button></div>';
     } else if(k === "booked"){
       const bits = ['Booked for ' + clockLabel(p.rtime || p.time) + ', party of ' + p.party + '.'];
       if(p.conf) bits.push('Confirmation ' + p.conf + '.');
       const cb = nyLocal(p.cancelBy); if(cb) bits.push('Free cancellation until ' + fShort.format(cb) + '.');
       sub = esc(bits.join(' '));
-      acts = btn("remind", "Add to calendar", "solid") + btn("share", "Share") + btn("edit", "Edit booking") + btn("del", "Remove");
+      tap = "edit";
     } else {
       sub = esc(clockLabel(p.time) + ', party of ' + p.party + '.');
-      acts = btn("again", "Try another night") + btn("del", "Remove");
+      tap = "again";
     }
-    return '<li><div class="info"><div class="line"><span class="rname">' + esc(R.n) + '</span><span class="leader" aria-hidden="true"></span><span class="rule">' + esc(dateStrLabel(p.date)) + '</span></div><div class="sub">' + sub + '</div></div><div class="acts">' + acts + '</div></li>';
+    return '<li class="prow-li"><button type="button" class="prow" data-pact="' + tap + '" data-id="' + id + '"><span class="line"><span class="rname">' + esc(R.n) + '</span><span class="leader" aria-hidden="true"></span><span class="rule">' + esc(dateStrLabel(p.date)) + '</span></span><span class="sub">' + sub + '</span></button>' +
+      '<button type="button" class="iconbtn" data-menu="' + id + '" aria-label="More options for ' + esc(R.n) + '">⋯</button>' + extra + '</li>';
   }
   function renderPlans(){
     const now = Date.now();
@@ -932,6 +1206,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     $("#noPlans").hidden = !!rows.length;
     renderList();
     renderDrops();
+    renderNext();
     $("#allApple").hidden = !rows.some(x => planStat(x.p, x.d, now) === "upcoming" && x.d.at != null);
     const sections = [["opened","Tables opened. Did you get one?"],["upcoming","Coming up"],["booked","Booked"],["missed","Didn’t get it"]];
     $("#plans").innerHTML = sections.map(([k, title]) => {
@@ -1131,8 +1406,53 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const P = calList[0]; if(!P) return;
     lastCal = {kind: "google", list: [P], saved: false};
     $("#cfGoogle").hidden = true;
-    $("#invWhat").textContent = "Added? In Google Calendar, check the event starts at " + fShort.format(P.pingAt) + ", then tap Save.";
+    $("#invWhat").textContent = "Added? In Google Calendar, check the event starts at " + fShort.format(P.pingAt) + ", then tap Save. Google uses your default alert, so set it to 15 and 5 minutes in Google Calendar.";
   });
+  $("#setBtn").addEventListener("click", () => { unlockAudio(); updatePingBtn(); const d = $("#setDlg"); if(!d.open){ if(typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); } });
+  $("#setClose").addEventListener("click", () => $("#setDlg").close());
+  $("#expFile").addEventListener("click", exportFile);
+  $("#expCopy").addEventListener("click", exportCopy);
+  $("#impOpen").addEventListener("click", () => { $("#setDlg").close(); openImport(); });
+  $("#impCancel").addEventListener("click", () => $("#impDlg").close());
+  $("#impGo").addEventListener("click", async () => {
+    let text = $("#impText").value.trim();
+    const f = $("#impFile").files && $("#impFile").files[0];
+    if(!text && f){ try{ text = await f.text(); }catch(e){} }
+    const err = $("#impErr");
+    if(!text){ err.textContent = "Paste a backup code or choose a backup file first."; err.hidden = false; return; }
+    const r = restore(text);
+    if(typeof r === "string"){ err.textContent = r; err.hidden = false; return; }
+    $("#impDlg").close();
+    showToast("Restored: " + r.added + " new plan" + (r.added === 1 ? "" : "s") + (r.updated ? ", " + r.updated + " updated" : "") + (r.favs ? ", " + r.favs + " favorite" + (r.favs === 1 ? "" : "s") : "") + (r.skipped ? ". " + r.skipped + " already here or not valid." : "."));
+  });
+  $("#fixCancel").addEventListener("click", () => $("#fixDlg").close());
+  $("#fixReset").addEventListener("click", () => {
+    if(!fixR) return;
+    delete settings.ov[fixR.id]; lsSet(LS_SET, settings);
+    $("#fixDlg").close(); afterFix();
+    showToast(fixR.n + " is back to the original schedule.");
+  });
+  $("#fixSave").addEventListener("click", () => {
+    const R = fixR; if(!R) return;
+    const err = $("#fixErr"), t = $("#fixTime").value, o = {on: Date.now(), t: /^\d{2}:\d{2}/.test(t) ? t.slice(0,5) : ""};
+    if(!$("#fixDaysWrap").hidden){
+      const raw = $("#fixDays").value.trim(), n = parseInt(raw, 10);
+      if(raw === "" && ORIG[R.id].r === "none"){ err.textContent = "Add how many days before the dinner date it opens."; err.hidden = false; return; }
+      if(raw !== ""){ if(!Number.isFinite(n) || n < 0 || n > 400){ err.textContent = "Days ahead should be a number from 0 to 400."; err.hidden = false; return; } o.r = "days"; o.a = n; }
+    }
+    if(!$("#fixDomWrap").hidden){
+      const n = parseInt($("#fixDom").value, 10);
+      if(!Number.isFinite(n) || n < 1 || n > 31){ err.textContent = "Day of the month should be from 1 to 31."; err.hidden = false; return; }
+      o.d = n;
+    }
+    settings.ov[R.id] = o; lsSet(LS_SET, settings);
+    $("#fixDlg").close(); afterFix();
+    showToast("Saved your fix for " + R.n + ". Re-add any calendar invites for it so the times match.");
+  });
+  $("#menuClose").addEventListener("click", () => $("#menuDlg").close());
+  $("#dropClose").addEventListener("click", closeDropMode);
+  $("#dropDlg").addEventListener("close", () => { dropPlanId = null; try{ if(wakeLock) wakeLock.release(); }catch(e){} wakeLock = null; });
+  $("#card").addEventListener("toggle", e => { const d = e.target; if(!d || !d.dataset || !d.dataset.fold) return; if(d.open) openFolds.add(d.dataset.fold); else openFolds.delete(d.dataset.fold); }, true);
   $("#calPref").value = calPref();
   $("#calPref").addEventListener("change", e => lsSet(LS_CALPREF, e.target.value));
   $("#invGoogle").addEventListener("click", () => {
@@ -1170,14 +1490,18 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     if(calOk(P)){ addToCalendar([P], true); updatePingBtn(); return; }
     $("#dlg").close();
     showToast(P.pingAt != null ? "Saved. You’ll get a ping at " + fShort.format(P.pingAt) + " if this page is open." : "Saved. Check " + R.p + " the day before; this drop time isn’t published.");
-    if(!pingsWanted) setTimeout(() => showToast("Turn on pings at the top so the page can alert you."), 6500);
+    if(!pingsWanted) setTimeout(() => showToast("Turn on pings in Settings so the page can alert you."), 6500);
     updatePingBtn();
   });
   document.addEventListener("click", e => {
     const fv = e.target.closest("[data-fav]");
     if(fv){ toggleFav(fv.dataset.fav); return; }
+    const mn = e.target.closest("[data-menu]");
+    if(mn){ openMenu(mn.dataset.menu); return; }
+    const dm = e.target.closest("[data-drop]");
+    if(dm){ openDropMode(dm.dataset.drop); return; }
     const pa = e.target.closest("[data-pact]");
-    if(pa){ unlockAudio(); planAction(pa.dataset.pact, pa.dataset.id); return; }
+    if(pa){ unlockAudio(); if($("#menuDlg").open) $("#menuDlg").close(); planAction(pa.dataset.pact, pa.dataset.id); return; }
     const pl = e.target.closest("[data-plan]");
     if(pl){ unlockAudio(); const R = byId[pl.dataset.plan]; if(R) openPlanner(R, null, pl.dataset.date, pl.dataset.time, pl.dataset.party); return; }
     const op = e.target.closest("[data-open]");
@@ -1188,6 +1512,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     if(dl){ removePlan(dl.dataset.del); return; }
     const act = e.target.closest("[data-act]");
     if(act && act.dataset.act === "dismiss") $("#toast").hidden = true;
+    if(act && act.dataset.act === "fix" && current){ openFix(current); return; }
     if(act && act.dataset.act === "remindAll"){ const list = needsReminder(); if(list.length) addToCalendar(list, false); }
     if(act && act.dataset.act === "share" && current){ shareIt(planShareText(current, $("#pDate").value, $("#pTime").value || "19:30", +$("#pParty").value || 2, null)); }
   });
@@ -1198,11 +1523,13 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   $("#nbR").innerHTML += opts([...new Set(DATA.map(R => R.nb).filter(Boolean))].sort());
   $("#cuR").innerHTML += opts([...new Set(DATA.map(R => R.cu).filter(Boolean))].sort());
   $("#platD").innerHTML += [...new Set(DATA.map(R => R.p))].sort().map(p => '<option value="' + esc(p) + '">' + esc(p) + '</option>').join("");
+  $("#mineD").value = (settings.fav.length || plans.length) ? "mine" : "";
   renderList(); renderPlans(); updatePingBtn();
   let lastMin = 0;
   setInterval(() => {
     const now = Date.now();
     checkPings(now);
+    checkDropMode(now);
     document.querySelectorAll("[data-at]").forEach(el => { el.textContent = rel(+el.dataset.at - now); });
     if(now - lastMin > 60000){ lastMin = now; renderPlans(); if($("#dlg").open) renderCard(); }
   }, 1000);
@@ -1221,7 +1548,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   const P = {R, date: "2026-12-05", time: "19:30", party: 2, drop, pingAt: drop.at - T.LEAD, state: "future"};
   const ics = T.icsFile([T.dropEvent(P)]);
   check(ics.includes("\r\nDTSTART:20261105T150000Z\r\n"), "Carbone Dec 5: DTSTART 20261105T150000Z");
-  check(ics.includes("TRIGGER:-PT15M") && ics.includes("TRIGGER:PT0M"), "Both alarms present");
+  check(/TRIGGER:-PT15M[\s\S]*TRIGGER:-PT5M[\s\S]*TRIGGER:PT0M/.test(ics), "Alarms in order: 15 min, 5 min, at the drop");
   check(ics.endsWith("\r\n") && !/[^\r]\n|\r[^\n]/.test(ics), "Every line ends in CRLF");
   const longest = Math.max(...ics.split("\r\n").slice(0, -1).map(l => enc.encode(l).length));
   check(longest <= 75, "Longest line " + longest + " bytes (max 75)");
