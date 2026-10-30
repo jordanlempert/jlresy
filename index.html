@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JLResy</title>
+<meta name="apple-mobile-web-app-title" content="JLResy">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#F4EFE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0D0C" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E0D0C'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23C8A45C' stroke-width='2'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='26' fill='%23C8A45C'%3EJL%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAKBElEQVR42u2d7W8URRzHd/Z6vT7clYKl7fWgD0hFjYIGo1YwakTBGgNRfEh8Y3xh5G8wvjDRP8CEpL4xmphITCTBoAkSIBEjGoEICMhDaaFP9EpbaHu00N6DLyrn9q69m52bmZ3Z+X5fwfZub3fms9/f7zc7O0tqImELghaTjSaAAAcEOCDAAQEOCHBAgAMCHBDggAAHBDggCHBAgAMCHBDggAAHBDggwAEBDghwQIADgu6pzMzTPti1w+1XXt61z7RWIiY8msCAAnDxMxyCgDAKFL/BQckEQ1+K2zPg8JgJ7n0m/xcBB89OktY9KhwD4CjeH553hrIHZgQcWrS+PxDRDI78Rle8ubU7YC3h4N7K7722jv7DX++/aCAiGsDBpWXzUXDV3yV+XVNEVIcjp0Hdtma2U0u89DnuucQzAhwlNaLzKufOBK+f0wIRReFga7v5fpIABJcDUJ8PFeFwtpouWHBBRDU+1IKD4WJSCgu2A1PWQhSCw20bKYsFw0GqyYcqcLhyVy2wKBERFfhQAg76RtEOC7cHrxQf3sPhigxNsXB1FurwYYMMyfp6/8XCI/fOdpA8n00h56AkQ+tQwnxSKviHZ3DQk+EzLOjPznM+bJChbIjxPL7YIAN8qAIHyNCID8+qFZDBxodv4ciCDzKY+ZBpHrZ8MkwYzBA0BCKZD1s+GUvZhuFkFOVDfvIhO+cAGbz48AkcRVMNkMHAhwTzsKWRgTyDe/4hmg95YcXAxU90b0mxcCCgaB1cvLxlDzJ4Fbf6wVHYNkBGiXxIMA9bNBmQzHpQs7AC25BgHjo5B2zDH+Yh1jlgG1qbB1YwhiTCgSLFN2ULnAOSBUdheGEbgsxDUFoqyjlwJ0WmBLW2vLAC25BjHorCQTNFFBJtHhwjiyTngG3oaB6oVqAlxe1NTaoNmXesb/xk19P0n+8ZnPzw0yPz/35n2wPvb3/Y7S9+/u2pn369qsK5H+zawSWy83cOVZYsIqRnYOLuXKroJ1PpzEA88cuJgeyWuWS6f3gqmUrT/FAylR4enT59afRs95jPahYZ73jzJOE4dvr6sdPXCbHqV1Q1N0Y2PRbt3NyaYxV7Dlzsuz7VH08kkws42Huoe++h7oBNoiurVzeEOze3PvVoo/MDpy+NHvjtWnx8Oj42PXrrTiaT8STtEN2qPn8BYCZjxcem42PTbbGanD+dOBf/5cRgUUcZiCc2PdaU86ejJwcP/9nv+5yDT1hR/x59PhxXhyaZv9szOKn4+XLpEc45R37YU6SIbW3K7eBeug4mhDRHI8xgSS5o+aYdRpSytk2aGxd0cDqd6RueovlurL46FAw4t4yMz9yemTOi3Uw4yVh9OFi24EwHRxJzSapipC3fcoYmDBnnMAKO/A6+OjRF+d3WGGM8Ahx6qLUpknf103bwmtiyXLAAB0NirOz9trb8DvZvqcLxDpxY51CmVImwhYZQeSBaV+XckkylB+IJRTgQfQfO/2ElFAw0rax2brk7lxq6cZuKqmgNIcS5pX84QTmsjrCigZqjkZwO7rs+RTngvUg2OmRKwmEEHHzHRs3JRo2Ag3lsdPFBDsDhbzhKK1UmAIefwwrl1b+8JlQbCTm33J6Zu3FzBnD4ROGq4H3LKpxbpm7Pjk3cQUwBHItmoyUMnA8BDn9no9S3zdoMHjg3wzlKuOW22P1YwIE61rIIIS1RxkF3wKEJHKwjYLH66lC5oXN8jICjbnlluDLo3HLjJm0HmzzHxwg42koY/jJ5jo8kOLxdY5XvwLmCpYroGREc4PDkJUJ0tSjPgXNdShWOc6/8HFaYnSN/Ckgyle4fTliGybdw2DZpblzwPuW7sylK52htMnqOj//haFpZXb7weZOL126m0lLn+Hz8wZMHu3a8sWUt4FCsVMnr4PM94+zJivtsdHlNqGN9o2VZ/1D/rs/hyM9JvSpY8hOOk+dHmEsVhjp2a0dLWcCeS6Yv992SVqqouJqggg8l5HTw+OSdM5fHmJ3D7QgYIda2TS2WZV3uu0X5aB1fKbp4iwR1ffTCwa4dzz7eVOAza1YtuKd69OQQ5aTi2sgic3xGxt3N8Xl83cr5ekffmCIJDr6RxbbJ6oawZVk5+WZOBztr0Uwms/9oL7ttuI8prz7b9l+i0ysEDjkPBAlc+1yQYvXheSxybow59cyGqPO/R44P9A9PscPhslSpjYQ6Nvy3EtD5K/KcQ921z6WlHdlkYinnIMTa/vwa5/DGNz9ecFPmlDrHZ2tHc1nAtixrZHyGckqiggmHpeOyT9lnGxtWVC76gZ1b2p1X/+7vzlA+37ZkqULtHMvC5bH68Cv3Fh/TOuGQBwfHBc6yV/brL96fzlh7D3eP37s6Q8HA21vb3+18MPvh/Ud7fz52jWa3dbUVqxsjqxrCLXkP1r7bue7ubO6qhDYhtk0CAVJRHqisCIYrg8trQjmrgJzr0Tjh4AzHy7v2zYc9XutgFs4JCCFvvrR255a1fcNTI+PTFeVl7c21FaH/Y82eA5e++uF84b0990TsrZfaVzWEK0NLNsXGh+rZDlWmc4hY60BeWOFlHoMjiWhdVfbeByFWSzSSM6Wvd3Dyi+///uvCjaJ727yhqb25VsT5zs6lrgxM6GsbAuEQZx4f7f59xbKKjQ/VP7L2vpZopLGuqroiGAiQicTszYk7Z6+M/XFm+NSl0TTdbZTPvjz+2ZfHLc0lqEIkNZGwTH/DCvkibEPQ+jlYGB+SCEfhiWHeThyEbcA5IB3ggHlIsw1t4MBrvORLRJsLDyswD01tw8KrQ2Eb3jgHyhZNixQlqhXwwUyGH6qVog/DgQ82MuQsKS7POdR/m5MuktaSwuEoijbMgzmgiM76ZTgHgot2AcWbhBR8cCHDJ2ElH3PwUToZcoaR5DkHzfkYzgdl4SptgFFqWKFZ5sVYPgqT4cnrsDwbBAMfDGRIlmw4aJIP0/igJ0PyHSsPnAN8aEGGZ2EFfKhPhiVi9jlb2lHg5Of58Nmc9aIn5TkZHsPhqgn89ExD0XNRgQzL8wnGlPHFTyFGFzK8dw4G/9A3xNAcvDpkqAKH20bRDhHKA1aKDIXgyA8r/kCEAQtLmRm4CsHB1kbKIkJ/YGqSoRwczO6qFCKuDka1UKI6HMwXk+eIMGNhKfkwh6JwlNJ2zopXAihsP6c+GUrDwaURsz3HnRLmPWuBhR5wWIsNjjE0aP4AmqtOLfHrHE8EcMhoWVfjrSUaj3ZYaAaHpq2sKRZawmEtfQtGqUbX4iB9CIfire8PLPSGo2hnyOwPFY4BcLB0j6BOkv+LgEN4nzH3nLg9Aw5FKeElX65k5Fs4JIDi+6WtjICDCy4GrnJmKBwQjbCCMQQ4IMABAQ4IcECAAwIcEOCAAAcEOCDAAUGAAwIcEOCAAAcEOCDAAQEOCHBAgAMyT/8C+P6XDwywDGkAAAAASUVORK5CYII=">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4EFE6; --surface:#FBF8F2; --ink:#16130F; --muted:#665D50; --line:#D8CDBB; --gold:#8A6820;
+  --ox:#7A1F2B; --on-ox:#FBEFF0; --field:#FFFDF9; --live:#7A1F2B; --on-ink:#F4EFE6;
+  --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%236B6255' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --display:"Cormorant Garamond",Cormorant,Garamond,"Times New Roman",serif;
+  --sans:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#0E0D0C; --surface:#171513; --ink:#F2EBDD; --muted:#A79F90; --line:#3A342C; --gold:#C8A45C;
+    --ox:#8E2A36; --on-ox:#F7E4E6; --field:#0B0A09; --live:#E58A93; --on-ink:#0E0D0C;
+    --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23A79F90' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); color-scheme:dark; } }
+:root[data-theme="dark"]{ --bg:#0E0D0C; --surface:#171513; --ink:#F2EBDD; --muted:#A79F90; --line:#3A342C; --gold:#C8A45C;
+    --ox:#8E2A36; --on-ox:#F7E4E6; --field:#0B0A09; --live:#E58A93; --on-ink:#0E0D0C;
+    --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23A79F90' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); color-scheme:dark; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:8px 20px 80px}
+button{font:inherit;cursor:pointer;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.btn{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:9px 18px;font-weight:500;font-size:15px;line-height:1.2;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px}
+.btn:hover{border-color:var(--ink)}
+.btn.solid{background:var(--ox);border-color:var(--ox);color:var(--on-ox)}
+.btn.solid:hover{border-color:var(--ox);filter:brightness(1.1)}
+.btn.on{border-color:var(--gold);color:var(--gold)}
+.btn.sm{padding:7px 16px;font-size:14px;min-height:40px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0 4px}
+.brand{display:flex;align-items:center;gap:12px;margin:0;font-family:var(--display);font-weight:600;font-size:30px;letter-spacing:.03em;line-height:1}
+.mono{width:44px;height:44px;flex-shrink:0;color:var(--gold)}
+.lede{font-family:var(--display);font-weight:500;font-size:clamp(36px,9.5vw,50px);line-height:1.02;margin:30px 0 12px;max-width:15ch}
+.sublede{color:var(--muted);margin:0 0 26px;max-width:46ch}
+
+.tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);margin:0 0 18px}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:12px 6px;font-weight:500;font-size:15px;color:var(--muted);min-height:48px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold)}
+
+input[type=text],input[type=date],input[type=time],select{display:block;width:100%;height:48px;margin:0;font:inherit;font-size:16px;line-height:1.25;color:var(--ink);background-color:var(--field);border:1px solid var(--line);border-radius:10px;padding:0 14px;-webkit-appearance:none;appearance:none}
+input[type=date],input[type=time]{line-height:46px;text-align:left;min-width:0}
+input[type=date]::-webkit-date-and-time-value,input[type=time]::-webkit-date-and-time-value{text-align:left;margin:0;line-height:46px;min-height:46px}
+input[type=date]::-webkit-datetime-edit,input[type=time]::-webkit-datetime-edit{padding:0;line-height:46px}
+input[type=date]::-webkit-datetime-edit-fields-wrapper,input[type=time]::-webkit-datetime-edit-fields-wrapper{padding:0}
+input[type=date]::-webkit-calendar-picker-indicator,input[type=time]::-webkit-calendar-picker-indicator{margin:0 0 0 auto}
+input:focus,select:focus{border-color:var(--gold);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 25%,transparent)}
+select{padding-right:38px;background-image:var(--chev);background-repeat:no-repeat;background-position:right 15px center;background-size:12px 8px;cursor:pointer}
+
+ul.menu{list-style:none;margin:8px 0 0;padding:0}
+ul.menu li{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding:16px 0}
+ul.menu li.hot{background:color-mix(in srgb,var(--ox) 8%,transparent);margin:0 -12px;padding:16px 12px}
+.info{flex:1;min-width:0}
+.line{display:flex;align-items:baseline;gap:10px}
+.rname{font-family:var(--display);font-style:italic;font-weight:500;font-size:25px;line-height:1.12;overflow-wrap:anywhere}
+.leader{flex:1;min-width:12px;border-bottom:1px dotted var(--line);transform:translateY(-6px)}
+.rule{font-size:14px;white-space:nowrap;color:var(--muted)}
+.sub{color:var(--muted);font-size:14px;margin-top:3px}
+.flag{color:var(--gold)}
+.badge{display:inline-block;font-size:12px;font-weight:500;line-height:1.3;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap;margin-top:6px}
+.badge.hot{background:var(--ox);border-color:var(--ox);color:var(--on-ox)}
+.empty{color:var(--muted);padding:20px 0}
+.foot{color:var(--muted);font-size:13px;margin-top:32px;max-width:52ch}
+
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink);width:min(620px,100%);max-width:100%;max-height:100%;height:100%;margin:0 auto;border-radius:0}
+@media (min-width:700px){ dialog{height:auto;max-height:calc(100% - 40px);border-radius:16px;margin:auto} }
+dialog::backdrop{background:rgba(8,7,6,.6)}
+.dlg{display:flex;flex-direction:column;height:100%;max-height:inherit}
+.dlg-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 18px) 20px 14px;border-bottom:1px solid var(--line)}
+.dlg-head h2{font-family:var(--display);font-style:italic;font-weight:500;font-size:36px;line-height:1.05;margin:0}
+.dlg-head p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.dlg-body{overflow:auto;padding:18px 20px 24px;flex:1}
+.dlg-foot{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px calc(env(safe-area-inset-bottom,0px) + 14px);border-top:1px solid var(--line)}
+.dlg-foot .btn{flex:1}
+.close{background:none;border:1px solid var(--line);border-radius:999px;width:44px;height:44px;font-size:22px;line-height:1;flex-shrink:0}
+.picks{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px}
+.picks label span{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}
+
+.card{margin-top:20px}
+.ticket{border:1px solid var(--gold);border-radius:6px;padding:24px 20px 20px;box-shadow:inset 0 0 0 5px var(--surface),inset 0 0 0 6px color-mix(in srgb,var(--gold) 40%,transparent)}
+.opens-label{color:var(--gold);font-size:14px;font-weight:500;letter-spacing:.03em;margin:0}
+.opens{font-family:var(--display);font-weight:500;font-size:clamp(32px,8.5vw,44px);line-height:1.05;margin:8px 0 0}
+.opens-time{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(60px,18vw,92px);line-height:.95;color:var(--gold);margin:4px 0 14px}
+.count{font-size:21px;font-weight:600;margin:0;font-variant-numeric:tabular-nums}
+.card.past .opens-time,.card.past .count{color:var(--live)}
+.card.past .count{font-size:17px;font-weight:500}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 0}
+.facts div{border-top:1px solid var(--line);padding-top:8px}
+.facts dt{font-size:13px;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-weight:500}
+.sec{margin-top:26px}
+.sec h3{font-family:var(--display);font-weight:600;font-size:26px;margin:0 0 8px}
+.sec ol{margin:0;padding-left:24px}
+.sec ol li{margin-bottom:9px}
+.sec ol li::marker{color:var(--gold);font-weight:600}
+.sec p{margin:0 0 8px}
+.warn{border-left:2px solid var(--ox);border-radius:0;padding:8px 12px;margin:16px 0 0;background:color-mix(in srgb,var(--ox) 8%,transparent);font-size:15px}
+.err{color:var(--live);margin:16px 0 0}
+.srcs{font-size:14px;color:var(--muted)}
+.srcs a{color:var(--muted)}
+
+.toast{position:fixed;left:0;right:0;top:0;z-index:20;padding:calc(env(safe-area-inset-top,0px) + 10px) 12px 0;display:flex;justify-content:center;pointer-events:none}
+.toast .tc{pointer-events:auto;max-width:600px;width:100%;background:var(--ink);color:var(--bg);border-radius:12px;padding:14px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+.toast .tc.alert{background:var(--ox);color:var(--on-ox)}
+.toast .tc p{margin:0;font-size:15px}
+.toast .tc .ta{display:flex;gap:8px;flex-shrink:0}
+.toast .tc a,.toast .tc button{color:inherit;border:1px solid currentColor;background:none;border-radius:999px;padding:6px 12px;font-size:14px;text-decoration:none}
+@media (prefers-reduced-motion: no-preference){ .toast .tc{animation:drop .28s ease-out} @keyframes drop{from{transform:translateY(-16px);opacity:0}} }
+
+#plans li{flex-wrap:wrap}
+#plans .info{flex-basis:100%}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+#allApple{margin:4px 0}
+dialog.mini{height:fit-content;max-width:440px;width:calc(100% - 32px);border-radius:16px;margin:auto}
+.mini-body{padding:24px 20px 20px}
+.mini-body h3{font-family:var(--display);font-weight:600;font-size:28px;line-height:1.1;margin:0 0 4px}
+.choices{display:grid;gap:8px;margin:16px 0 0}
+.choices .btn{width:100%}
+#invWhat{margin:10px 0 0;font-weight:500}
+.tabs{grid-template-columns:repeat(3,1fr)}
+.filters{display:flex;gap:8px;margin:0 0 6px}
+.filters select{height:42px;font-size:15px}
+.dnote{font-size:13px;color:var(--muted);margin:4px 0 0}
+.group{margin:24px 0 0}
+.group h3{font-family:var(--display);font-weight:600;font-size:25px;line-height:1.15;margin:0 0 2px;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.group h3 span{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--gold)}
+.drow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 0;min-height:60px;color:inherit}
+.drow .info,.drow .rname,.drow .sub{display:block}
+.drow .rname{font-size:22px}
+.drow .chev{font-size:24px;color:var(--muted);flex-shrink:0}
+.drow:hover .rname{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.bigbtn{width:100%;margin-top:16px}
+.note{font-size:13px;color:var(--muted);margin:8px 0 0}
+.remind{border:1px solid var(--ox);border-radius:10px;padding:14px;margin:0 0 14px;background:color-mix(in srgb,var(--ox) 7%,transparent)}
+.remind p{margin:0 0 10px;font-size:15px}
+.filters{flex-wrap:wrap}
+.filters select{flex:1 1 140px;width:auto}
+.chip{display:inline-flex;align-items:center;gap:6px;height:42px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:var(--field);font-size:15px;font-weight:500;color:var(--muted)}
+.chip[aria-pressed="true"]{border-color:var(--gold);color:var(--gold)}
+.star{background:none;border:0;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;border-radius:999px;margin-left:-10px}
+.star[aria-pressed="true"]{color:var(--gold)}
+.star svg{width:22px;height:22px}
+.hbtns{display:flex;gap:4px;align-items:center}
+.hbtns .star{margin:0}
+.sec-title{font-family:var(--display);font-weight:600;font-size:24px;margin:24px 0 0}
+.field{display:block;margin:14px 0 0}
+.field span{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}
+input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:inherit;font-size:16px;color:var(--ink);background-color:var(--field);border:1px solid var(--line);border-radius:10px;padding:0 14px;-webkit-appearance:none;appearance:none;line-height:46px;text-align:left;min-width:0}
+.meta{color:var(--muted);font-size:14px}
+.checks label{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px;min-height:48px;cursor:pointer}
+.checks input{width:22px;height:22px;accent-color:var(--ox);flex-shrink:0;margin:0}
+.ask{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:14px;white-space:pre-wrap;user-select:text;-webkit-user-select:text;max-height:34vh;overflow:auto;margin:12px 0}
+.ok{color:var(--gold);font-weight:500;margin:12px 0 0}
+#invDone{width:100%;margin-top:12px}
+.inv-steps{margin:12px 0 4px;padding-left:22px}
+.inv-steps li{margin-bottom:6px}
+.inv-steps li::marker{color:var(--gold)}
+#unused{position:fixed;inset:auto 0 0 0;max-height:50vh;overflow:auto;margin:0;padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 12px);background:#111;color:#e8e8e8;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;z-index:30}
+@media (max-width:420px){ .picks{grid-template-columns:1fr 1fr} .picks label:first-child{grid-column:1 / -1} }
+</style>
+</head>
+<body>
+<div class="toast" id="toast" hidden role="status" aria-live="polite"><div class="tc" id="toastCard"></div></div>
+
+<main class="wrap">
+  <header class="top">
+    <h1 class="brand"><svg class="mono" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="24" cy="24" r="19.5" fill="none" stroke="currentColor" stroke-width=".6" opacity=".55"/><text x="24" y="30.5" text-anchor="middle" font-family="Cormorant Garamond, Garamond, Times New Roman, serif" font-style="italic" font-weight="600" font-size="19" fill="currentColor">JL</text></svg>JLResy</h1>
+    <button class="btn quiet sm" id="pingBtn" type="button">Turn on pings</button>
+  </header>
+  <p class="lede">New York’s hardest tables, on your terms.</p>
+  <p class="sublede">Pick a restaurant and the night you want. You’ll see the exact moment tables open, how to book, and get a calendar invite that alerts you 15 minutes before.</p>
+
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="tabD" aria-selected="true" aria-controls="panelD">Drops</button>
+    <button type="button" role="tab" id="tabR" aria-selected="false" aria-controls="panelR">Restaurants</button>
+    <button type="button" role="tab" id="tabP" aria-selected="false" aria-controls="panelP">My plans</button>
+  </div>
+
+  <section id="panelD" role="tabpanel" aria-labelledby="tabD">
+    <div class="remind" id="remindD" hidden></div>
+    <div class="filters">
+      <select id="platD" aria-label="Platform"><option value="">All platforms</option></select>
+      <select id="mineD" aria-label="Which restaurants"><option value="">All restaurants</option><option value="fav">My favorites</option><option value="planned">Ones I’ve planned</option></select>
+    </div>
+    <p class="dnote">Every drop in the next 24 hours, plus monthly drops in the next 7 days. Daily drops repeat at the same time every day. Tap one to plan it.</p>
+    <div id="drops"></div>
+    <p class="empty" id="noDrops" hidden>No drops match these filters.</p>
+  </section>
+
+  <section id="panelR" role="tabpanel" aria-labelledby="tabR" hidden>
+    <input type="text" id="search" placeholder="Find a restaurant, neighborhood or cuisine" aria-label="Find a restaurant, neighborhood or cuisine" autocomplete="off">
+    <div class="filters" style="margin-top:10px">
+      <button class="chip" type="button" id="favR" aria-pressed="false">★ Favorites</button>
+      <select id="nbR" aria-label="Neighborhood"><option value="">All neighborhoods</option></select>
+      <select id="cuR" aria-label="Cuisine"><option value="">All cuisines</option></select>
+    </div>
+    <p class="dnote">Neighborhoods and cuisines are unverified. Blank where unsure.</p>
+    <ul class="menu" id="list"></ul>
+    <p class="empty" id="noResults" hidden>No restaurants match that search.</p>
+  </section>
+
+  <section id="panelP" role="tabpanel" aria-labelledby="tabP" hidden>
+    <div class="remind" id="remindP" hidden></div>
+    <button class="btn quiet sm" type="button" id="allApple" hidden>Download all calendar invites</button>
+    <div id="plans"></div>
+    <p class="empty" id="noPlans">No plans yet. Pick a restaurant, choose a night, and save the plan to get pinged before tables open.</p>
+  </section>
+
+  <p class="foot">Schedules compiled October 28, 2026 from SnagRes, The Infatuation and Resy. Restaurants change their rules, so check the booking page if a time looks off. Pings work while this page is open. Add plans to your calendar to get alerts when it’s closed. Your plans and favorites are saved in this browser, so plan on the phone where you want the alerts.</p>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgName">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div><h2 id="dlgName"></h2><p id="dlgRule"></p></div>
+      <div class="hbtns"><button class="star" type="button" id="dlgStar" aria-pressed="false" aria-label="Add to favorites"></button><button class="close" type="button" id="closeBtn" aria-label="Close">×</button></div>
+    </div>
+    <div class="dlg-body">
+      <div class="picks">
+        <label><span>Night you want</span><input type="date" id="pDate"></label>
+        <label><span>Time</span><input type="time" id="pTime" value="19:30" step="900"></label>
+        <label><span>Party</span><select id="pParty"></select></label>
+      </div>
+      <div id="card" class="card" aria-live="polite"></div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn solid" type="button" id="saveBtn">Save plan and ping me</button>
+      <button class="btn quiet" type="button" id="calBtn" hidden>Add to calendar</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="invDlg" class="mini" aria-labelledby="invTitle">
+  <div class="mini-body">
+    <h3 id="invTitle"></h3>
+    <p id="invWhat"></p>
+    <div id="calChoices">
+      <p class="hint">Add a reminder so you don’t miss it.</p>
+      <div class="choices">
+        <button class="btn solid" type="button" id="invApple">Apple or Outlook calendar (.ics)</button>
+        <a class="btn" id="invGoogle" target="_blank" rel="noopener noreferrer">Add to Google Calendar</a>
+      </div>
+    </div>
+    <div id="appleHelp" hidden>
+      <ol class="inv-steps">
+        <li>Tap Copy message.</li>
+      </ol>
+      <p class="ask" id="appleAsk"></p>
+      <button class="btn solid" type="button" id="copyAsk" style="width:100%">Copy message</button>
+    </div>
+    <p class="ok" id="invOk" role="status" hidden></p>
+    <button class="btn" type="button" id="invDone">Done</button>
+  </div>
+</dialog>
+
+<dialog id="gotDlg" class="mini" aria-labelledby="gotTitle">
+  <div class="mini-body">
+    <h3 id="gotTitle">Nice, you got it</h3>
+    <p class="hint" id="gotWhat"></p>
+    <label class="field"><span>Reservation time</span><input type="time" id="gotTime" step="900"></label>
+    <label class="field"><span>Confirmation number (optional)</span><input type="text" id="gotConf" autocomplete="off"></label>
+    <label class="field"><span>Free cancellation until (optional)</span><input type="datetime-local" id="gotCancel"></label>
+    <p class="note">Many hard-to-book places charge a fee if you cancel late. The deadline is usually in your confirmation email or the booking app.</p>
+    <div class="choices"><button class="btn solid" type="button" id="gotSave">Save booking</button><button class="btn" type="button" id="gotClose">Cancel</button></div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  const $ = s => document.querySelector(s);
+  const DATA = [{"n":"4 Charles Prime Rib","p":"Resy","c":"high","s":[0,2],"u":"https://resy.com/cities/new-york-ny/venues/4-charles-prime-rib","t":"09:00","x":"Verified repeat diners get priority. Walk-in line forms by 3pm.","r":"days","a":21,"nb":"West Village","cu":"Steakhouse"},{"n":"The Polo Bar","p":"Phone","c":"high","s":[0,2],"t":"10:00","x":"Phone only: 212-207-8562. Opens the matching calendar date one month out (window varies 28-31 days). Try calling ~4pm day-of for cancellations.","r":"polo","ph":"212-207-8562","nb":"Midtown","cu":"American"},{"n":"Carbone","p":"Resy","c":"high","s":[0,2],"u":"https://resy.com/cities/new-york-ny/venues/carbone","t":"10:00","x":"No walk-ins. Prime time gone within ~2 minutes.","r":"days","a":30,"nb":"Greenwich Village","cu":"Italian"},{"n":"Torrisi","p":"Resy","c":"high","s":[0,2],"u":"https://resy.com/cities/new-york-ny/venues/torrisi","t":"10:00","x":"One older source says 9am; current sources say 10am. 12-seat walk-in bar for 1-2 people.","r":"days","a":30,"nb":"Nolita","cu":"Italian"},{"n":"Ramen By Ra","p":"Resy","c":"high","s":[1,0,2],"u":"https://resy.com/cities/new-york-ny/venues/ramen-by-ra","t":"09:00","x":"Drops twice a month: also add a second entry for the 15th at 9:00. Reservation only, 6 seats.","r":"ramen","cu":"Japanese"},{"n":"Ambassadors Clubhouse","p":"Resy","c":"low","s":[0,1,2],"u":"https://resy.com/cities/new-york-ny/venues/ambassadors-clubhouse-new-york","x":"Drops roughly mid-month; exact day/time not published. Join Priority Access on their website to be told the exact drop.","r":"monthly","d":15,"nb":"NoMad","cu":"Indian"},{"n":"Atomix","p":"Tock","c":"medium","s":[0,2],"u":"https://www.exploretock.com/atomixnyc","t":"15:00","x":"Release hour from The Infatuation; SnagRes lists no hour.","r":"monthly","d":1,"nb":"NoMad","cu":"Korean"},{"n":"Tatiana by Kwame Onwuachi","p":"Resy","c":"high","s":[0,1,2],"u":"https://resy.com/cities/new-york-ny/venues/tatiana","t":"12:00","x":"Six-seat walk-in bar for parties of 2.","r":"days","a":28,"nb":"Upper West Side","cu":"Caribbean & African"},{"n":"Buvette","p":"Resy","c":"low","s":[2],"t":"05:00","x":"Release hour observed, not published.","r":"days","a":14,"nb":"West Village","cu":"French"},{"n":"The Eighty Six","p":"Website","c":"medium","s":[0,2],"u":"https://fp.sevenrooms.com/explore/theeightysix/reservations","x":"Hour not published. 2-6 walk-in bar seats; arrive by 4:30pm.","r":"days","a":14,"nb":"West Village","cu":"Steakhouse"},{"n":"Hillstone","p":"Wisely","c":"medium","s":[5,7],"u":"https://hillstonerestaurant.com/locations/nyc-parkavenuesouth/","x":"7-day window confirmed on the booking page on Oct 30, 2026. The exact release time isn’t published, so check the booking page the morning 7 days before your date. Parties of 1 to 4 only. Cancel after 9 AM on the day and it’s $25 per person. Two-person walk-ins are welcome; phone (212) 689-1090.","r":"days","a":7,"mx":4,"nb":"NoMad","cu":"American"},{"n":"Sushi Noz","p":"SevenRooms","c":"low","s":[10,11],"u":"https://sushinoz.com","x":"Two Michelin stars. The head chef’s 6 PM and 9 PM seatings book up months ahead. Cancellations are allowed until 72 hours before, so check 72 to 80 hours ahead of your date. Bookings moved to SevenRooms; there’s also a waitlist.","r":"none","nb":"Upper East Side","cu":"Japanese & sushi"},{"n":"Rezdora","p":"Resy","c":"low","s":[9],"x":"Rule from a December 2021 Resy interview, so it may have changed. Prime-time 7 and 7:30 PM slots go first. A card is required to book.","t":"00:00","r":"days","a":30,"nb":"Flatiron","cu":"Italian"},{"n":"Pastis","p":"Resy","c":"medium","s":[2],"x":"SnagRes tracks Pastis as hard to book: 26 days ahead on Resy, release hour not recorded.","r":"days","a":26,"nb":"Meatpacking District","cu":"French"},{"n":"Misi","p":"Resy","c":"high","s":[8],"u":"https://resy.com/cities/new-york-ny/venues/misi","x":"Once the hottest table in town; The Infatuation (Oct 2026) says same-day tables now often appear. No seats saved for walk-ins.","t":"10:00","r":"days","a":28,"nb":"Williamsburg","cu":"Italian"},{"n":"Altro Paradiso","p":"OpenTable","c":"medium","s":[12,13],"u":"https://www.opentable.com/r/altro-paradiso","x":"Opens about a month ahead; release hour not published. If you can’t book, space often opens up at the bar.","r":"days","a":30,"nb":"SoHo","cu":"Italian"},{"n":"Ha’s Snack Bar","p":"Resy","c":"medium","s":[2,1,0],"u":"https://resy.com/cities/new-york-ny/venues/has-snack-bar","t":"12:00","x":"Restaurant rule says 20 days; Resy’s guide says three weeks.","r":"days","a":20,"nb":"Lower East Side","cu":"Vietnamese"},{"n":"Bistrot Ha","p":"Resy","c":"medium","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/bistrot-ha","t":"00:00","x":"Resy says two weeks at midnight; SnagRes observes 13 days.","r":"days","a":14,"nb":"Lower East Side","cu":"French"},{"n":"Sushi Sho","p":"Tock","c":"medium","s":[0],"u":"https://www.exploretock.com/sushi-sho-nyc","t":"11:00","r":"monthly","d":1,"mb":2,"cu":"Japanese & sushi"},{"n":"Una Pizza Napoletana","p":"OpenTable","c":"high","s":[0,2],"u":"https://www.opentable.com/r/una-pizza-napoletana-new-york","t":"09:00","x":"Open Thu-Sat only. Walk-ins get drinks and dessert only.","r":"days","a":14,"od":[4,5,6],"nb":"Lower East Side","cu":"Pizza"},{"n":"Semma","p":"SevenRooms","c":"high","s":[2,4,0],"u":"https://www.sevenrooms.com/explore/semma/reservations/create/search/","t":"09:00","x":"12 bar seats for walk-ins.","r":"days","a":15,"nb":"West Village","cu":"Indian"},{"n":"Lilia","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/lilia","t":"10:00","x":"Reservationist line 718-576-3095, 10am-4pm.","r":"days","a":28,"nb":"Williamsburg","cu":"Italian"},{"n":"Via Carota","p":"Resy","c":"high","s":[2],"u":"https://resy.com/cities/new-york-ny/venues/via-carota","t":"10:00","r":"days","a":30,"nb":"West Village","cu":"Italian"},{"n":"Don Angie","p":"OpenTable","c":"low","s":[2,3],"x":"Conflict: SnagRes lists OpenTable, 7 days; an older TablePass post says Resy, 30 days at 10am. Check the restaurant’s site.","r":"days","a":7,"nb":"West Village","cu":"Italian"},{"n":"Monkey Bar","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/monkey-bar-nyc","t":"09:00","r":"days","a":21,"nb":"Midtown","cu":"American"},{"n":"The Four Horsemen","p":"Resy","c":"high","s":[1,0,2],"u":"https://resy.com/cities/new-york-ny/venues/the-four-horsemen","t":"07:00","x":"Walk-in waitlist starts 4:45pm.","r":"days","a":30,"nb":"Williamsburg","cu":"Wine bar"},{"n":"I Cavallini","p":"Resy","c":"high","s":[1,0],"u":"https://resy.com/cities/new-york-ny/venues/i-cavallini","t":"08:00","x":"Bar and counter held for walk-ins.","r":"days","a":14,"nb":"Williamsburg","cu":"Italian"},{"n":"Cafe Charmant","p":"Other","c":"medium","s":[0],"t":"09:00","x":"Walk-ins most realistic; arrive by 5pm.","r":"days","a":7},{"n":"Oyatte","p":"Other","c":"medium","s":[0],"t":"12:00","r":"monthly","d":1},{"n":"Graciela","p":"OpenTable","c":"medium","s":[0],"t":"10:00","r":"days","a":14},{"n":"Somssi","p":"Resy","c":"high","s":[1,0,2],"u":"https://resy.com/cities/new-york-ny/venues/somssi","t":"10:00","r":"days","a":14},{"n":"Or’esh","p":"SevenRooms","c":"medium","s":[0,2],"u":"https://www.sevenrooms.com/explore/450wbroadway/reservations/create/search/","x":"Hour not published. Walk-in line by 4pm.","r":"days","a":7,"nb":"SoHo"},{"n":"Wild Cherry","p":"SevenRooms","c":"high","s":[2,0],"u":"https://www.sevenrooms.com/explore/wildcherry/reservations","t":"00:00","r":"days","a":14},{"n":"The Corner Store","p":"SevenRooms","c":"medium","s":[0,2],"u":"https://fp.sevenrooms.com/explore/thecornerstore/reservations","x":"Hour not published; SnagRes observes 13 days.","r":"days","a":14,"nb":"SoHo","cu":"American"},{"n":"Red Hook Tavern","p":"OpenTable","c":"medium","s":[0,2],"u":"https://www.opentable.com/r/red-hook-tavern-brooklyn","x":"Hour not published.","r":"days","a":14,"nb":"Red Hook","cu":"American"},{"n":"Good Time Country Buffet","p":"Resy","c":"medium","s":[0],"t":"18:00","x":"Over half the seats held for walk-ins. Platform unconfirmed.","r":"days","a":15},{"n":"Eleven Madison Park","p":"Resy","c":"high","s":[2],"t":"10:00","r":"monthly","d":1,"nb":"NoMad","cu":"Tasting menu"},{"n":"Per Se","p":"Tock","c":"high","s":[2],"t":"10:00","r":"monthly","d":1,"nb":"Columbus Circle","cu":"Tasting menu"},{"n":"Le Bernardin","p":"Resy","c":"low","s":[2],"t":"07:00","x":"Reported by a third party, not the restaurant.","r":"monthly","d":1,"nb":"Midtown","cu":"Seafood"},{"n":"Bong","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/bong","t":"00:00","r":"days","a":21,"nb":"Crown Heights","cu":"Cambodian"},{"n":"Bungalow","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/bungalow-ny","t":"11:00","x":"No release on Tuesdays.","r":"days","a":20,"nr":[2],"nb":"East Village","cu":"Indian"},{"n":"COQODAQ","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/coqodaq","t":"10:00","r":"days","a":14,"nb":"Flatiron","cu":"Korean"},{"n":"Penny","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/penny","t":"09:00","x":"Limited reservations; most seats are walk-in.","r":"days","a":14,"nb":"East Village","cu":"Seafood"},{"n":"Claud","p":"Resy","c":"high","s":[2],"t":"09:00","r":"days","a":14,"nb":"East Village","cu":"Wine bar"},{"n":"Cote","p":"Resy","c":"high","s":[2],"t":"10:00","r":"days","a":30,"nb":"Flatiron","cu":"Korean"},{"n":"Bangkok Supper Club","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/bangkok-supper-club","t":"00:00","r":"days","a":28,"nb":"West Village","cu":"Thai"},{"n":"Odo East Village","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/odo-east-village","t":"00:00","x":"14 seats.","r":"days","a":30,"nb":"East Village","cu":"Japanese & sushi"},{"n":"Golden Diner","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/golden-diner","t":"00:00","x":"Includes brunch.","r":"days","a":30,"nb":"Chinatown","cu":"American"},{"n":"Rubirosa","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/rubirosa","t":"00:00","x":"Leftover tables release again at 11am the next day. Half the room is walk-in.","r":"days","a":7,"nb":"Nolita","cu":"Pizza"},{"n":"Raoul’s","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/raoulsrestaurant","t":"08:00","r":"days","a":30,"nb":"SoHo","cu":"French"},{"n":"Theodora","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/theodora","t":"09:00","r":"days","a":30,"nb":"Fort Greene","cu":"Mediterranean"},{"n":"L’Artusi","p":"Resy","c":"high","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/lartusi-ny","t":"09:00","r":"days","a":14,"nb":"West Village","cu":"Italian"},{"n":"Le Café Louis Vuitton","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/le-cafe-louis-vuitton","t":"00:00","r":"days","a":28,"nb":"Midtown","cu":"French"},{"n":"Double Chicken Please (The Coop)","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/double-chicken-please","t":"00:00","x":"80% of The Coop is walk-in.","r":"days","a":6,"nb":"Lower East Side","cu":"Bar"},{"n":"Borgo","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/borgo","t":"10:00","r":"days","a":21,"nb":"NoMad","cu":"Italian"},{"n":"Lei","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/lei","t":"09:00","r":"days","a":14},{"n":"Cleo","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/cleo-nyc","t":"10:00","r":"days","a":14},{"n":"Kidilum","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/kidilum","t":"11:00","r":"days","a":14,"cu":"Indian"},{"n":"Dear Margo","p":"Resy","c":"medium","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/dear-margo","x":"’One month in advance’; hour not given.","r":"days","a":30},{"n":"schmuck.","p":"Resy","c":"high","s":[1],"u":"https://resy.com/cities/new-york-ny/venues/schmuck-nyc","t":"10:00","r":"days","a":14,"nb":"East Village","cu":"Bar"},{"n":"Thai Diner","p":"Resy","c":"medium","s":[1,2],"u":"https://resy.com/cities/new-york-ny/venues/thai-diner","t":"09:00","x":"Hour observed, not published.","r":"days","a":7,"nb":"Nolita","cu":"Thai"},{"n":"Dhamaka","p":"SevenRooms","c":"medium","s":[2,3],"t":"09:00","x":"An older source says 6 days at midnight.","r":"days","a":7,"nb":"Lower East Side","cu":"Indian"},{"n":"ADDA","p":"SevenRooms","c":"high","s":[2],"t":"09:00","r":"days","a":7,"cu":"Indian"},{"n":"Musaafer","p":"OpenTable","c":"medium","s":[2,4],"x":"Hour not published.","r":"days","a":14,"nb":"Tribeca","cu":"Indian"},{"n":"Kisa","p":"Resy","c":"high","s":[2],"t":"00:00","r":"days","a":15,"nb":"Lower East Side","cu":"Korean"},{"n":"Minetta Tavern","p":"Resy","c":"medium","s":[2],"t":"00:00","x":"Reported by a third party.","r":"days","a":30,"nb":"Greenwich Village","cu":"French"},{"n":"Le Veau d’Or","p":"SevenRooms","c":"high","s":[2],"t":"09:00","r":"days","a":14,"nb":"Upper East Side","cu":"French"},{"n":"Jungsik","p":"Tock","c":"high","s":[2],"t":"11:00","r":"days","a":30,"nb":"Tribeca","cu":"Korean"},{"n":"César","p":"Tock","c":"low","s":[2],"t":"12:00","x":"Reported by a third party.","r":"monthly","d":1,"nb":"Hudson Square","cu":"French"},{"n":"Tsukimi","p":"Tock","c":"high","s":[2],"t":"15:00","r":"monthly","d":1,"nb":"East Village","cu":"Japanese & sushi"},{"n":"Atera","p":"Tock","c":"low","s":[2],"x":"Hour unknown.","r":"days","a":29,"nb":"Tribeca","cu":"Tasting menu"},{"n":"ICCA","p":"Tock","c":"low","s":[2],"x":"Hour unknown.","r":"days","a":29,"nb":"Tribeca","cu":"Japanese & sushi"},{"n":"Umeko","p":"Resy","c":"high","s":[2],"t":"00:00","r":"days","a":29},{"n":"Yamada","p":"Resy","c":"high","s":[2],"t":"00:00","r":"days","a":20,"nb":"Chinatown","cu":"Japanese & sushi"},{"n":"Ito","p":"Resy","c":"high","s":[2],"t":"12:00","r":"days","a":21,"cu":"Japanese & sushi"},{"n":"Dame","p":"Resy","c":"high","s":[2],"t":"12:00","r":"days","a":21,"nb":"Greenwich Village","cu":"Seafood"},{"n":"Jua","p":"Resy","c":"high","s":[2],"t":"00:00","r":"days","a":21,"nb":"Flatiron","cu":"Korean"},{"n":"Kono","p":"Resy","c":"high","s":[2],"t":"00:00","r":"days","a":20,"cu":"Japanese & sushi"},{"n":"Au Cheval","p":"Resy","c":"high","s":[2],"t":"09:00","r":"days","a":21,"nb":"Tribeca","cu":"American"},{"n":"Chez Fifi","p":"SevenRooms","c":"high","s":[2],"t":"10:00","r":"days","a":21,"nb":"Upper East Side","cu":"French"},{"n":"Laser Wolf","p":"Resy","c":"high","s":[2],"t":"10:00","r":"days","a":21,"nb":"Williamsburg","cu":"Mediterranean"},{"n":"COTE 550","p":"Resy","c":"high","s":[2],"t":"10:00","r":"days","a":14,"cu":"Korean"},{"n":"Clemente Bar","p":"Resy","c":"medium","s":[2],"t":"10:00","x":"Hour observed, not published.","r":"days","a":21,"nb":"NoMad","cu":"Bar"},{"n":"Roscioli","p":"SevenRooms","c":"high","s":[2],"t":"10:00","r":"days","a":14,"nb":"SoHo","cu":"Italian"},{"n":"Oriana","p":"Resy","c":"high","s":[2],"t":"09:00","r":"days","a":14},{"n":"Naks","p":"SevenRooms","c":"high","s":[2],"t":"09:00","r":"days","a":7,"cu":"Filipino"},{"n":"Bridges","p":"Resy","c":"high","s":[2],"t":"12:00","r":"days","a":20},{"n":"Cecchi’s","p":"Resy","c":"medium","s":[2],"t":"12:00","x":"Hour observed, not published.","r":"days","a":29,"nb":"West Village","cu":"American"},{"n":"Forsythia","p":"Resy","c":"medium","s":[2],"t":"10:00","x":"Hour observed, not published.","r":"days","a":21,"nb":"Lower East Side","cu":"Italian"},{"n":"Sami & Susu","p":"Resy","c":"medium","s":[2],"t":"09:00","x":"Hour observed, not published.","r":"days","a":20,"nb":"Lower East Side","cu":"Mediterranean"},{"n":"Lucia Alimentari","p":"Resy","c":"medium","s":[2],"t":"07:00","x":"Hour observed, not published.","r":"days","a":20},{"n":"Casa Mono","p":"OpenTable","c":"medium","s":[2],"t":"00:00","x":"Reported by a third party.","r":"days","a":30,"nb":"Gramercy","cu":"Spanish"},{"n":"Jeju Noodle Bar","p":"Resy","c":"medium","s":[2],"t":"00:00","x":"Reported by a third party.","r":"days","a":44,"nb":"West Village","cu":"Korean"},{"n":"Kabawa","p":"OpenTable","c":"medium","s":[2],"t":"00:00","x":"Hour observed, not published.","r":"days","a":14,"nb":"East Village","cu":"Caribbean & African"},{"n":"Il Leone","p":"Resy","c":"medium","s":[2],"t":"00:00","x":"Hour observed, not published.","r":"days","a":13,"nb":"West Village","cu":"Italian"},{"n":"Dandelion","p":"Resy","c":"medium","s":[2],"t":"00:00","x":"Cocktail bar. Hour observed, not published.","r":"days","a":13,"cu":"Bar"},{"n":"I Sodi","p":"Resy","c":"low","s":[2],"x":"Hour not published.","r":"days","a":13,"nb":"West Village","cu":"Italian"},{"n":"Huso","p":"Resy","c":"low","s":[2],"x":"Hour unknown.","r":"days","a":30,"nb":"Tribeca","cu":"Tasting menu"},{"n":"Essex","p":"Resy","c":"low","s":[2],"x":"Window 30+ days; hour unknown.","r":"days","a":30,"nb":"Lower East Side","cu":"American"},{"n":"Oberon","p":"Resy","c":"low","s":[2],"x":"Hour unknown.","r":"days","a":13},{"n":"Raf’s","p":"OpenTable","c":"low","s":[2],"x":"Hour unknown.","r":"days","a":14,"nb":"NoHo","cu":"French"},{"n":"Raku","p":"SevenRooms","c":"low","s":[2],"x":"Hour not published.","r":"days","a":14,"nb":"East Village","cu":"Japanese & sushi"},{"n":"Selene","p":"Resy","c":"low","s":[2],"x":"Window 30+ days; hour unknown.","r":"days","a":30},{"n":"Shinzo Omakase","p":"Resy","c":"low","s":[2],"x":"Window 30+ days; hour unknown.","r":"days","a":30,"cu":"Japanese & sushi"},{"n":"Sushi Hayashi Williamsburg","p":"Resy","c":"low","s":[2],"x":"Hour unknown.","r":"days","a":30,"nb":"Williamsburg","cu":"Japanese & sushi"},{"n":"Sushi Ikumi","p":"Resy","c":"low","s":[2],"x":"Hour not published.","r":"days","a":14,"cu":"Japanese & sushi"}];
+  const SRC = [["The Infatuation","https://www.theinfatuation.com/new-york/guides/toughest-restaurant-reservations-nyc"],["Resy","https://blog.resy.com/the-one-who-keeps-the-book/toughest-restaurant-reservations-nyc/"],["SnagRes","https://snagres.com/release-times"],["TablePass","https://tablepass.nyc/blog/hardest-reservations-nyc-2026"],["NY Post via AOL","https://www.aol.com/articles/nyc-hardest-restaurant-reservations-one-211439000.html"],["It’s a Date NYC","https://itsadate.nyc/restaurants/hillstone-reservations"],["TableSwap","https://www.tableswap.app/us/new-york-city-ny/hillstone"],["The Infatuation review","https://www.theinfatuation.com/new-york/reviews/hillstone-park-avenue"],["The Infatuation, previously impossible","https://www.theinfatuation.com/new-york/guides/previously-impossible-reservations-you-can-get-now"],["Resy (2021)","https://blog.resy.com/2021/12/how-to-get-into-new-yorks-rezdora-and-what-to-order/"],["The Sushi Legend","https://thesushilegend.com/?p=3473"],["Sushi Noz on OpenTable","https://www.opentable.es/r/sushi-noz-new-york"],["Appetito","https://appetitomagazine.com/guides/where-to-eat-italian-during-new-york-fashion-week"],["Altro Paradiso on OpenTable","https://www.opentable.com/r/altro-paradiso?rid=212494"]];
+  const NY = "America/New_York";
+  const LOCAL_TZ = Intl.DateTimeFormat().resolvedOptions().timeZone || NY;
+  const LEAD = 15 * 60000;
+  const LS_PLANS = "jlresy.plans", LS_FIRED = "jlresy.fired", LS_PINGS = "jlresy.pings", LS_SET = "jlresy.settings";
+  try{
+    [["droplist.plans.v2", LS_PLANS], ["droplist.fired.v2", LS_FIRED], ["droplist.pings.v1", LS_PINGS]].forEach(([from, to]) => {
+      const v = localStorage.getItem(from);
+      if(v != null && localStorage.getItem(to) == null) localStorage.setItem(to, v);
+    });
+  }catch(e){}
+  const WD = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  DATA.forEach(r => { r.id = r.n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); });
+  const byId = Object.fromEntries(DATA.map(r => [r.id, r]));
+
+  function lsGet(k,f){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; }catch(e){ return f; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+  function safeUrl(u){ try{ const x = new URL(u); return (x.protocol === "https:" || x.protocol === "http:") ? x.href : ""; }catch(e){ return ""; } }
+
+  let plans = lsGet(LS_PLANS, []);
+  let settings = lsGet(LS_SET, {fav: []}); if(!Array.isArray(settings.fav)) settings.fav = [];
+  let setRef = null;
+  let fired = lsGet(LS_FIRED, {});
+  let pingsWanted = lsGet(LS_PINGS, false);
+  let col = null, audioCtx = null, current = null, editingPlanId = null;
+
+  /* ---------- Time math ---------- */
+  const dtf = new Intl.DateTimeFormat("en-US",{timeZone:NY,hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"});
+  function parts(t){ const o = {}; for(const p of dtf.formatToParts(new Date(t))) if(p.type !== "literal") o[p.type] = +p.value; if(o.hour === 24) o.hour = 0; return o; }
+  function offset(t){ const p = parts(t); return Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second) - Math.floor(t/1000)*1000; }
+  function zoned(y,m,d,hh,mm){ const g = Date.UTC(y,m-1,d,hh,mm); let t = g - offset(g); const o2 = offset(t); if(g - o2 !== t) t = g - o2; return t; }
+  function cal(y,m,d,n){ const dt = new Date(Date.UTC(y,m-1,d+(n||0))); return {y:dt.getUTCFullYear(),m:dt.getUTCMonth()+1,d:dt.getUTCDate(),wd:dt.getUTCDay()}; }
+  function daysIn(y,m){ return new Date(Date.UTC(y,m,0)).getUTCDate(); }
+  function prevMonth(y,m,k){ m -= k; while(m < 1){ m += 12; y--; } return {y,m}; }
+  function iso(c){ return c.y + "-" + String(c.m).padStart(2,"0") + "-" + String(c.d).padStart(2,"0"); }
+  function todayNY(){ const p = parts(Date.now()); return {y:p.year,m:p.month,d:p.day}; }
+
+  function dropFor(R, dateStr){
+    const [y,m,d] = dateStr.split("-").map(Number);
+    let c;
+    if(R.r === "polo"){ const pm = prevMonth(y,m,1); c = {y:pm.y,m:pm.m,d:Math.min(d, daysIn(pm.y,pm.m))}; }
+    else if(R.r === "monthly"){ const pm = prevMonth(y,m,R.mb || 1); c = {y:pm.y,m:pm.m,d:Math.min(R.d || 1, daysIn(pm.y,pm.m))}; }
+    else if(R.r === "ramen"){ if(d >= 16) c = {y,m,d:1}; else { const pm = prevMonth(y,m,1); c = {y:pm.y,m:pm.m,d:15}; } }
+    else c = cal(y,m,d,-(R.a || 0));
+    c = cal(c.y,c.m,c.d,0);
+    let at = null;
+    if(R.t){ const [hh,mm] = R.t.split(":").map(Number); at = zoned(c.y,c.m,c.d,hh,mm); }
+    const dayStart = zoned(c.y,c.m,c.d,0,0);
+    return {cal:c, at, dayStart};
+  }
+
+  /* ---------- Formatting ---------- */
+  const showTz = LOCAL_TZ !== NY;
+  const fFull = new Intl.DateTimeFormat(undefined,{weekday:"long",month:"long",day:"numeric",hour:"numeric",minute:"2-digit",...(showTz?{timeZoneName:"short"}:{})});
+  const fDateL = new Intl.DateTimeFormat(undefined,{weekday:"long",month:"long",day:"numeric"});
+  const fShort = new Intl.DateTimeFormat(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+  const fTime = new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit",...(showTz?{timeZoneName:"short"}:{})});
+  const fCalLong = new Intl.DateTimeFormat(undefined,{weekday:"long",month:"long",day:"numeric",timeZone:"UTC"});
+  const fCal = new Intl.DateTimeFormat(undefined,{weekday:"short",month:"short",day:"numeric",timeZone:"UTC"});
+  const fClock = new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit",timeZone:"UTC"});
+  const calDate = c => new Date(Date.UTC(c.y,c.m-1,c.d));
+  const dateStrLabel = (s, long) => { const [y,m,d] = s.split("-").map(Number); return (long ? fCalLong : fCal).format(new Date(Date.UTC(y,m-1,d))); };
+  const clockLabel = hhmm => { const [h,m] = hhmm.split(":").map(Number); return fClock.format(new Date(Date.UTC(2000,0,1,h,m))); };
+  function rel(ms){
+    if(ms <= 0) return "Open now";
+    const s = Math.floor(ms/1000), d = Math.floor(s/86400), h = Math.floor(s%86400/3600), m = Math.floor(s%3600/60), sec = s%60;
+    if(d) return "Opens in " + d + "d " + h + "h";
+    if(h) return "Opens in " + h + "h " + m + "m";
+    if(m) return "Opens in " + m + "m " + sec + "s";
+    return "Opens in " + sec + "s";
+  }
+  function ordinal(n){ const s=["th","st","nd","rd"], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+  function timeWord(t){ if(!t) return "time not published"; if(t === "00:00") return "midnight"; if(t === "12:00") return "noon"; return clockLabel(t).replace(":00",""); }
+  function ruleText(R){
+    if(R.r === "none") return "release schedule not published";
+    if(R.r === "polo") return "same date one month ahead, 10 AM";
+    if(R.r === "ramen") return "1st and 15th of each month, 9 AM";
+    if(R.r === "monthly") return ordinal(R.d || 1) + " of the month, " + (R.mb === 2 ? "two months ahead, " : "for the next month, ") + timeWord(R.t);
+    return R.a + " days ahead, " + timeWord(R.t);
+  }
+
+  /* ---------- Restaurant list ---------- */
+  function upcomingByRestaurant(){
+    const now = Date.now(), m = {};
+    for(const p of plans){
+      const R = byId[p.rid]; if(!R) continue;
+      const d = dropFor(R, p.date);
+      if(d.at == null || d.at <= now) continue;
+      if(!m[p.rid] || d.at < m[p.rid]) m[p.rid] = d.at;
+    }
+    return m;
+  }
+  function soonText(ms){
+    const h = Math.floor(ms / 3600000), m = Math.floor(ms % 3600000 / 60000);
+    return "Drops in " + (h ? h + "h " + m + "m" : Math.max(1, m) + "m");
+  }
+  const STAR = on => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .7-4.5 4.1 1.2 5.9L12 16.5l-5.3 2.9 1.2-5.9-4.5-4.1 6-.7z" fill="' + (on ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>';
+  function isFav(id){ return settings.fav.includes(id); }
+  function saveSettings(){ lsSet(LS_SET, settings); if(setRef){ try{ setRef.set({fav: settings.fav}).catch(() => {}); }catch(e){} } }
+  function toggleFav(id){
+    settings.fav = isFav(id) ? settings.fav.filter(x => x !== id) : settings.fav.concat(id);
+    saveSettings(); renderList(); renderDrops(); updateDlgStar();
+  }
+  function starBtn(R){
+    const f = isFav(R.id);
+    return '<button class="star" type="button" data-fav="' + esc(R.id) + '" aria-pressed="' + f + '" aria-label="' + (f ? 'Remove ' + esc(R.n) + ' from favorites' : 'Add ' + esc(R.n) + ' to favorites') + '">' + STAR(f) + '</button>';
+  }
+  function updateDlgStar(){
+    const b = $("#dlgStar"); if(!b || !current) return;
+    const f = isFav(current.id);
+    b.setAttribute("aria-pressed", f); b.setAttribute("aria-label", f ? "Remove from favorites" : "Add to favorites"); b.innerHTML = STAR(f);
+  }
+  const metaText = R => [R.nb, R.cu].filter(Boolean).join(", ");
+  function renderList(){
+    const q = ($("#search").value || "").trim().toLowerCase();
+    const fav = $("#favR").getAttribute("aria-pressed") === "true", nb = $("#nbR").value, cu = $("#cuR").value;
+    const shown = DATA.filter(R => (!q || (R.n + " " + R.p + " " + (R.nb || "") + " " + (R.cu || "")).toLowerCase().includes(q)) && (!fav || isFav(R.id)) && (!nb || R.nb === nb) && (!cu || R.cu === cu));
+    $("#noResults").hidden = !!shown.length;
+    $("#noResults").textContent = fav && !settings.fav.length ? "No favorites yet. Tap the star next to a restaurant to add it." : "No restaurants match these filters.";
+    const now = Date.now(), up = upcomingByRestaurant();
+    const isHot = R => up[R.id] && up[R.id] - now <= 864e5;
+    const rest = shown.filter(R => !isHot(R));
+    const ordered = shown.filter(isHot).sort((a,b) => up[a.id] - up[b.id]).concat(rest.filter(R => isFav(R.id)), rest.filter(R => !isFav(R.id)));
+    $("#list").innerHTML = ordered.map(R => {
+      const hot = isHot(R);
+      const badge = hot ? '<span class="badge hot">' + esc(soonText(up[R.id] - now)) + '</span>' : up[R.id] ? '<span class="badge">Planned</span>' : '';
+      const mt = metaText(R);
+      return '<li' + (hot ? ' class="hot"' : '') + '>' + starBtn(R) + '<div class="info"><div class="line"><span class="rname">' + esc(R.n) + '</span><span class="leader" aria-hidden="true"></span></div>' +
+        (mt ? '<div class="sub">' + esc(mt) + '</div>' : '') +
+        '<div class="sub">' + esc(R.p) + ', ' + esc(ruleText(R)) + (R.c === "low" ? ' <span class="flag">(unconfirmed)</span>' : '') + '</div>' + badge + '</div>' +
+        '<button class="btn sm" type="button" data-plan="' + esc(R.id) + '" aria-label="Plan a booking at ' + esc(R.n) + '">Plan</button></li>';
+    }).join("");
+  }
+
+  /* ---------- Plan computation ---------- */
+  function nextSaturday(){
+    const t = todayNY(); const c = cal(t.y,t.m,t.d,0);
+    const add = ((6 - c.wd + 7) % 7) || 7;
+    return iso(cal(t.y,t.m,t.d,add));
+  }
+  function computePlan(R, date, time, party){
+    if(R.r === "none") return {error: R.n + " doesn’t publish when reservations open, so there’s no drop to time. " + (R.x || ""), noRule: true, date, party};
+    const now = Date.now();
+    const t = todayNY();
+    const today = iso(cal(t.y,t.m,t.d,0));
+    if(!date) return {error:"Pick the night you want."};
+    if(date < today) return {error:"That date has passed. Pick a night from today on."};
+    const [y,m,d] = date.split("-").map(Number);
+    const diningWd = cal(y,m,d,0).wd;
+    const drop = dropFor(R, date);
+    const warns = [];
+    if(R.od && !R.od.includes(diningWd)) warns.push(R.n + " is only open " + R.od.map(i => WD[i]).join(", ").replace(/, ([^,]*)$/," and $1") + ". Pick one of those nights.");
+    if(R.nr && R.nr.includes(drop.cal.wd)) warns.push(R.n + " doesn’t release tables on " + WD[drop.cal.wd] + "s, so this date may open a day earlier or later. Check " + R.p + " on the days around " + fCal.format(calDate(drop.cal)) + ".");
+    if(R.c === "low") warns.push("This schedule is unconfirmed. Check the restaurant’s booking page before you rely on it.");
+    if(R.mx && party > R.mx) warns.push(R.n + " only takes parties of up to " + R.mx + ". Pick a smaller party size.");
+    let state;
+    if(drop.at != null){ state = now >= drop.at ? "past" : (now >= drop.at - LEAD ? "soon" : "future"); }
+    else { state = now >= drop.dayStart + 864e5 ? "past" : "unknown"; }
+    return {R, date, time, party, drop, warns, state, pingAt: drop.at != null ? drop.at - LEAD : null};
+  }
+
+  function stepsFor(P){
+    const R = P.R, dl = dateStrLabel(P.date), tl = clockLabel(P.time);
+    const dropL = P.drop.at != null ? fTime.format(P.drop.at) + " on " + fCal.format(calDate(P.drop.cal)) : "the moment it opens on " + fCal.format(calDate(P.drop.cal));
+    const pingL = P.pingAt != null ? fTime.format(P.pingAt) : "that morning";
+    if(R.p === "Phone") return [
+      "By " + pingL + ", have your date (" + dl + "), party of " + P.party + ", and a backup time ready.",
+      "Call " + R.ph + " at exactly " + dropL + ". If it’s busy, hang up and redial right away.",
+      "Ask for " + tl + ", and say yes to anything within about an hour of it.",
+      "No luck? Call again around 4 PM on " + dl + " for same-day cancellations."
+    ];
+    const where = {Resy:"the Resy app",OpenTable:"the OpenTable app",Tock:"Tock",SevenRooms:"the restaurant’s SevenRooms page",Website:"the restaurant’s booking page"}[R.p] || "the restaurant’s booking page";
+    const out = [
+      "By " + pingL + ", sign in to " + where + " and make sure a card is saved" + (R.p === "Tock" ? ". Tock charges up front and checkout times out fast." : ". Hard tables often need a card to hold them."),
+      "Open " + R.n + ", and set " + dl + " and a party of " + P.party + ".",
+      "At " + dropL + " exactly, refresh. Grab the first slot within about an hour of " + tl + ". You can swap later if a better one opens."
+    ];
+    out.push(R.p === "Resy" ? "If it’s gone, tap Notify for " + dl + " so Resy alerts you to cancellations."
+      : R.p === "Tock" ? "If it sells out, join the Tock waitlist for that date."
+      : R.p === "OpenTable" ? "If it’s gone, set an OpenTable alert for that date."
+      : "If it’s gone, join the waitlist if the page offers one.");
+    return out;
+  }
+
+  function renderCard(){
+    const R = current; if(!R) return;
+    const P = computePlan(R, $("#pDate").value, $("#pTime").value || "19:30", +$("#pParty").value || 2);
+    const card = $("#card"), save = $("#saveBtn"), calBtn = $("#calBtn");
+    if(P.error){ card.className = "card"; card.innerHTML = '<p class="err">' + esc(P.error) + '</p>' + (P.noRule && P.date ? bookHtml(R, P) : ''); save.disabled = true; calBtn.hidden = true; cardPlan = null; return; }
+    const url = safeUrl(R.u || "");
+    const dropDay = fCalLong.format(calDate(P.drop.cal));
+    let head;
+    if(P.state === "past"){
+      head = '<p class="opens-label">Tables for ' + esc(dateStrLabel(P.date, true)) + ' opened</p>' +
+        '<p class="opens">' + esc(P.drop.at != null ? fDateL.format(P.drop.at) : dropDay) + '</p>' +
+        (P.drop.at != null ? '<p class="opens-time">' + esc(fTime.format(P.drop.at)) + '</p>' : '') +
+        '<p class="count">They’ve likely been booked. Use the backup plan below.</p>';
+    } else if(P.drop.at != null){
+      head = '<p class="opens-label">Tables for ' + esc(dateStrLabel(P.date, true)) + ' open</p>' +
+        '<p class="opens">' + esc(fDateL.format(P.drop.at)) + '</p>' +
+        '<p class="opens-time">' + esc(fTime.format(P.drop.at)) + '</p>' +
+        '<p class="count" data-at="' + P.drop.at + '">' + esc(rel(P.drop.at - Date.now())) + '</p>' +
+        (R.t === "00:00" ? '<p class="hint">That’s the stroke of midnight ' + esc(WD[(P.drop.cal.wd + 6) % 7]) + ' night.</p>' : '');
+    } else {
+      head = '<p class="opens-label">Tables for ' + esc(dateStrLabel(P.date, true)) + ' open on</p>' +
+        '<p class="opens">' + esc(dropDay) + '</p>' +
+        '<p class="count">Time not published</p><p class="hint">Most NYC drops happen at midnight, 9 AM or 10 AM. Check ' + esc(R.p) + ' the day before to learn the exact time.</p>';
+    }
+    const where = R.p === "Phone" ? 'Phone: <a href="tel:' + esc(R.ph.replace(/[^0-9+]/g,"")) + '">' + esc(R.ph) + '</a>'
+      : url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(R.p) + '</a>' : esc(R.p);
+    const facts = '<dl class="facts">' +
+      '<div><dt>Your ping</dt><dd>' + (P.pingAt != null && P.state !== "past" ? esc(fShort.format(P.pingAt)) : "None") + '</dd></div>' +
+      '<div><dt>Book on</dt><dd>' + where + '</dd></div></dl>';
+    const warns = P.warns.map(w => '<p class="warn">' + esc(w) + '</p>').join("");
+    const steps = P.state === "past" ? "" : '<div class="sec"><h3>How to book it</h3><ol>' + stepsFor(P).map(s => '<li>' + esc(s) + '</li>').join("") + '</ol></div>';
+    const backupLines = [];
+    if(R.x) backupLines.push(R.x);
+    backupLines.push("Cancellations reappear most often a day or two before " + dateStrLabel(P.date) + ", so check again then.");
+    if(R.p === "Resy") backupLines.push("Set a Resy Notify for the date if you haven’t.");
+    const backup = '<div class="sec"><h3>' + (P.state === "past" ? "Backup plan" : "If you miss it") + '</h3>' + backupLines.map(b => '<p>' + esc(b) + '</p>').join("") + '</div>';
+    const srcs = '<div class="sec srcs">Confidence: ' + esc(R.c) + '. Sources: ' + R.s.map(i => '<a href="' + esc(SRC[i][1]) + '" target="_blank" rel="noopener noreferrer">' + esc(SRC[i][0]) + '</a>').join(", ") + '.</div>';
+    card.className = "card" + (P.state === "past" ? " past" : "");
+    card.innerHTML = '<div class="ticket">' + head + facts + '</div>' + bookHtml(R, P) + warns + prepHtml(P) + steps + backupsHtml(P) + backup + '<button class="btn bigbtn" type="button" data-act="share">Share this plan with friends</button>' + srcs;
+    save.disabled = P.state === "past";
+    save.textContent = (editingPlanId ? "Update plan" : "Save plan") + (calOk(P) ? " and add to calendar" : "");
+    cardPlan = P;
+    calBtn.hidden = !calOk(P);
+  }
+
+  /* ---------- Calendar ---------- */
+  let cardPlan = null, calTargets = [];
+  const fET = new Intl.DateTimeFormat("en-US",{timeZone:NY,weekday:"long",month:"long",day:"numeric",hour:"numeric",minute:"2-digit"});
+  function calOk(P){ return !!P && !P.error && P.drop.at != null && P.state !== "past" && Date.now() < P.drop.at; }
+  function eventDetails(P){
+    const R = P.R, url = safeUrl(R.u || "");
+    const lines = ["Booking " + dateStrLabel(P.date) + " at " + clockLabel(P.time) + ", party of " + P.party + ".", ""];
+    stepsFor(P).forEach((s,i) => lines.push((i+1) + ". " + s));
+    lines.push("");
+    if(R.p === "Phone" && R.ph) lines.push("Call: " + R.ph); else { const L = bookLink(R, P.date, P.party); if(L) lines.push("Book: " + L.href); }
+    if(R.x) lines.push("", "Backup: " + R.x);
+    return lines.join("\n");
+  }
+  function googleUrl(P){
+    const f = t => new Date(t).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+    return "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+      "&text=" + encodeURIComponent(P.R.n + " opens in 15 min") +
+      "&dates=" + f(P.pingAt) + "/" + f(P.drop.at + LEAD) +
+      "&details=" + encodeURIComponent(eventDetails(P)) +
+      "&location=" + encodeURIComponent(P.R.p);
+  }
+  /* ---------- Calendar ---------- */
+  function appleAsk(list){
+    const one = P => "“" + P.R.n + " reservations open” on " + fET.format(P.drop.at) + " ET, 15 minutes long, location " + P.R.p + ". Notes: Booking " + dateStrLabel(P.date) + " at " + clockLabel(P.time) + ", party of " + P.party + "." + (P.R.p === "Phone" && P.R.ph ? " Call " + P.R.ph + "." : ((L => L && !L.phone ? " Book: " + L.href : "")(bookLink(P.R, P.date, P.party))));
+    if(list.length === 1) return "Add this to my iPhone calendar with alerts 15 minutes before and at the start: " + one(list[0]);
+    return "Add these to my iPhone calendar, each with alerts 15 minutes before and at the start:\n" + list.map((P,i) => (i+1) + ". " + one(P)).join("\n");
+  }
+  let calList = [];
+  /* ---------- .ics downloads ---------- */
+  const enc = new TextEncoder();
+  const icsDate = t => new Date(t).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  const icsText = v => String(v).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\r\n|\r|\n/g,"\\n");
+  function fold(line){
+    if(enc.encode(line).length <= 75) return line;
+    const out = []; let cur = "", bytes = 0, limit = 75;
+    for(const ch of line){
+      const n = enc.encode(ch).length;
+      if(bytes + n > limit){ out.push(cur); cur = ""; bytes = 0; limit = 74; }
+      cur += ch; bytes += n;
+    }
+    out.push(cur);
+    return out.join("\r\n ");
+  }
+  function icsFile(events){
+    const stamp = icsDate(Date.now());
+    const L = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//JLResy//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH"];
+    for(const e of events){
+      L.push("BEGIN:VEVENT", "UID:" + e.uid, "SEQUENCE:" + (e.seq || 0), "DTSTAMP:" + stamp, "DTSTART:" + icsDate(e.start), "DTEND:" + icsDate(e.end),
+        "SUMMARY:" + icsText(e.title), "LOCATION:" + icsText(e.location || ""));
+      if(e.url) L.push("URL:" + e.url);
+      L.push("DESCRIPTION:" + icsText(e.details || ""));
+      for(const a of e.alarms) L.push("BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + icsText(a.text), a.at != null ? "TRIGGER;VALUE=DATE-TIME:" + icsDate(a.at) : "TRIGGER:" + a.rel, "END:VALARM");
+      L.push("END:VEVENT");
+    }
+    L.push("END:VCALENDAR");
+    return L.map(fold).join("\r\n") + "\r\n";
+  }
+  function dropEvent(P){
+    const p = plans.find(x => x.rid === P.R.id && x.date === P.date), L = bookLink(P.R, P.date, P.party);
+    return {uid: (p ? p.id : P.R.id + "-" + P.date) + "@jlresy", seq: p ? (p.seq || 0) : 0, start: P.drop.at, end: P.drop.at + LEAD,
+      title: P.R.n + " reservations open", location: P.R.p, url: L && !L.phone ? L.href : "", details: eventDetails(P),
+      alarms: [{rel: "-PT15M", text: P.R.n + " opens in 15 min"}, {rel: "PT0M", text: P.R.n + " is open now"}]};
+  }
+  const UA = navigator.userAgent || "";
+  const isIOS = /iP(hone|ad|od)/.test(UA) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  let lastFile = null;
+  function sendFile(text, filename){
+    let url = null;
+    try{ url = URL.createObjectURL(new Blob([text], {type: "text/calendar;charset=utf-8"})); }catch(e){}
+    if(isIOS){
+      // iPhone Safari shows its Add to Calendar screen when it opens a calendar file, so open it in a new tab.
+      const target = url || ("data:text/calendar;charset=utf-8," + encodeURIComponent(text));
+      const w = window.open(target, "_blank");
+      if(!w) window.location.href = target;
+    } else if(url){
+      const a = document.createElement("a");
+      a.href = url; a.download = filename; a.style.display = "none";
+      document.body.appendChild(a); a.click(); a.remove();
+    } else {
+      window.location.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(text);
+    }
+    if(url) setTimeout(() => URL.revokeObjectURL(url), 120000);
+  }
+  function downloadEvents(events, filename, check){
+    const text = icsFile(events);
+    lastFile = {text, filename};
+    sendFile(text, filename);
+    $("#calChoices").hidden = true; $("#appleHelp").hidden = true;
+    $("#invOk").textContent = (isIOS ? "The invite opened in a new tab. Tap Add to Calendar" + (events.length > 1 ? " (or Add All)." : ".") : "Calendar invite downloaded. Open " + filename + " from your Downloads to add it.") + " " + check;
+    $("#invOk").hidden = false;
+  }
+  function showInvDlg(){
+    if($("#dlg").open) $("#dlg").close();
+    const d = $("#invDlg");
+    if(!d.open){ if(typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+  }
+  function downloadDrops(list){
+    const one = list.length === 1;
+    downloadEvents(list.map(dropEvent), one ? list[0].R.id + "-" + list[0].date + ".ics" : "jlresy-plans.ics",
+      one ? "Check that the event shows " + fShort.format(list[0].drop.at) + ", with alerts 15 minutes before and at the drop." : "Each event has alerts 15 minutes before and at the drop.");
+    markCal(list);
+  }
+  function openCalendar(list, saved, appleOnly){
+    calList = list;
+    const P = list[0], one = list.length === 1;
+    $("#invTitle").textContent = saved ? "Plan saved" : (one ? "Add to calendar" : "Add all to calendar");
+    $("#invWhat").textContent = one ? P.R.n + " reservations open " + fShort.format(P.drop.at) + "." : list.length + " upcoming drops.";
+    $("#calChoices").hidden = false; $("#appleHelp").hidden = true; $("#invOk").hidden = true;
+    $("#invGoogle").hidden = !one;
+    if(one) $("#invGoogle").href = googleUrl(P);
+    showInvDlg();
+    if(appleOnly) downloadDrops(list);
+  }
+
+  /* ---------- Booking links ---------- */
+  function bookLink(R, date, party){
+    if(R.p === "Phone") return R.ph ? {href: "tel:" + R.ph.replace(/[^0-9+]/g,""), label: "Call " + R.ph, phone: true} : null;
+    const u = safeUrl(R.u || "");
+    if(R.p === "Resy"){
+      const q = "date=" + date + "&seats=" + party;
+      if(u) return {href: u + (u.includes("?") ? "&" : "?") + q, label: "Open Resy for " + dateStrLabel(date) + ", party of " + party, filled: true};
+      return {href: "https://resy.com/cities/new-york-ny/search?" + q + "&query=" + encodeURIComponent(R.n), label: "Search Resy for " + dateStrLabel(date) + ", party of " + party, filled: true, search: true};
+    }
+    return u ? {href: u, label: "Open " + R.p + " booking page"} : null;
+  }
+  function bookHtml(R, P){
+    const L = bookLink(R, P.date, P.party);
+    if(!L) return '<p class="note">No booking link on file. Look up ' + esc(R.n) + ' on ' + esc(R.p) + ' and set the date and party size yourself.</p>';
+    const note = L.phone ? "" : L.search ? "Opens Resy search with your date and party size set. Tap " + R.n + " in the results." : L.filled ? "Opens with your date and party size already set." : "Opens the restaurant’s page. Set the date and party size yourself; a pre-filled link isn’t available for " + R.p + " yet.";
+    return '<a class="btn solid bigbtn" href="' + esc(L.href) + '"' + (L.phone ? '' : ' target="_blank" rel="noopener noreferrer"') + '>' + esc(L.label) + '</a>' + (note ? '<p class="note">' + esc(note) + '</p>' : '');
+  }
+
+  /* ---------- Drops coming up ---------- */
+  const fMonth = new Intl.DateTimeFormat(undefined,{month:"long",timeZone:"UTC"});
+  const monthName = (y,m) => fMonth.format(new Date(Date.UTC(y,m-1,1)));
+  const fWkLong = new Intl.DateTimeFormat(undefined,{weekday:"long"});
+  const fDayShort = new Intl.DateTimeFormat(undefined,{weekday:"short",month:"short",day:"numeric"});
+  function addMonths(y,m,k){ m += k; while(m > 12){ m -= 12; y++; } return {y,m}; }
+  function dayKey(t){ const d = new Date(t); return d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate(); }
+  function upcomingDrops(days){
+    const now = Date.now(), end = now + days*864e5, out = [], t = todayNY();
+    for(const R of DATA){
+      if(!R.t) continue;
+      const [hh,mm] = R.t.split(":").map(Number);
+      const daily = R.r === "days" || R.r === "polo";
+      for(let i = 0; i <= days + 1; i++){
+        const c = cal(t.y,t.m,t.d,i);
+        let opens = null;
+        if(R.r === "days"){ const o = cal(c.y,c.m,c.d,R.a || 0); opens = {date: iso(o), label: "Tables for " + fCal.format(calDate(o))}; }
+        else if(R.r === "polo"){ const nm = addMonths(c.y,c.m,1); const o = {y:nm.y, m:nm.m, d:Math.min(c.d, daysIn(nm.y,nm.m))}; opens = {date: iso(o), label: "Tables for " + fCal.format(calDate(o))}; }
+        else if(R.r === "monthly"){
+          if(c.d !== Math.min(R.d || 1, daysIn(c.y,c.m))) continue;
+          const nm = addMonths(c.y,c.m,R.mb || 1); opens = {date: iso({y:nm.y,m:nm.m,d:1}), label: "All of " + monthName(nm.y,nm.m)};
+        }
+        else if(R.r === "ramen"){
+          if(c.d === 1) opens = {date: iso({y:c.y,m:c.m,d:16}), label: monthName(c.y,c.m) + " 16 through the end of the month"};
+          else if(c.d === 15){ const nm = addMonths(c.y,c.m,1); opens = {date: iso({y:nm.y,m:nm.m,d:1}), label: monthName(nm.y,nm.m) + " 1 through 15"}; }
+          else continue;
+        }
+        if(!opens) continue;
+        const at = zoned(c.y,c.m,c.d,hh,mm);
+        if(at <= now) continue;
+        if(at > (daily ? now + 864e5 : end)) break;
+        out.push({R, at, opens});
+        if(daily) break;
+      }
+    }
+    return out.sort((a,b) => a.at - b.at || a.R.n.localeCompare(b.R.n));
+  }
+  function groupLabel(at){
+    const d = new Date(at), now = Date.now();
+    if(d.getHours() === 0 && d.getMinutes() === 0){
+      if(dayKey(at) === dayKey(now + 864e5)) return "Tonight at midnight";
+      return fWkLong.format(at - 60000) + " night at midnight";
+    }
+    const day = dayKey(at) === dayKey(now) ? "Today" : dayKey(at) === dayKey(now + 864e5) ? "Tomorrow" : fDayShort.format(at);
+    return day + ", " + fTime.format(at);
+  }
+  function renderDrops(){
+    const plat = $("#platD").value, mine = $("#mineD").value;
+    const planned = new Set(plans.map(p => p.rid));
+    const list = upcomingDrops(7).filter(x => (!plat || x.R.p === plat) && (mine !== "planned" || planned.has(x.R.id)) && (mine !== "fav" || isFav(x.R.id)));
+    $("#noDrops").hidden = !!list.length;
+    const groups = [];
+    for(const x of list){ const g = groups[groups.length - 1]; if(g && g.at === x.at) g.items.push(x); else groups.push({at: x.at, items: [x]}); }
+    const now = Date.now();
+    $("#drops").innerHTML = groups.map(g =>
+      '<div class="group"><h3>' + esc(groupLabel(g.at)) + ' <span data-at="' + g.at + '">' + esc(rel(g.at - now)) + '</span></h3>' +
+      g.items.map(x => '<button type="button" class="drow" data-plan="' + esc(x.R.id) + '" data-date="' + x.opens.date + '"><span class="info"><span class="rname">' + (isFav(x.R.id) ? '<span class="flag">★</span> ' : '') + esc(x.R.n) + '</span><span class="sub">' + esc(x.opens.label) + ', on ' + esc(x.R.p) +
+        (planned.has(x.R.id) ? ' <span class="flag">Planned</span>' : '') + (x.R.c === "low" ? ' <span class="flag">(unconfirmed)</span>' : '') + '</span></span><span class="chev" aria-hidden="true">›</span></button>').join("") +
+      '</div>').join("");
+    renderRemind();
+  }
+
+  /* ---------- Reminder nudges ---------- */
+  function needsReminder(){
+    return plans.filter(p => !p.cal && !p.status && byId[p.rid])
+      .map(p => computePlan(byId[p.rid], p.date, p.time, p.party)).filter(calOk).sort((a,b) => a.drop.at - b.drop.at);
+  }
+  function renderRemind(){
+    const n = needsReminder().length;
+    ["#remindD","#remindP"].forEach(sel => {
+      const el = $(sel); el.hidden = !n;
+      if(n) el.innerHTML = '<p><strong>' + (n === 1 ? "1 saved plan has" : n + " saved plans have") + ' no calendar reminder yet.</strong> Pings only work while this page is open, so a calendar alert is the safest way not to miss a drop.</p><button class="btn solid sm" type="button" data-act="remindAll">Download ' + (n === 1 ? "the calendar invite" : "all calendar invites") + '</button>';
+    });
+  }
+  async function markCal(list){
+    for(const P of list){
+      const p = plans.find(x => x.rid === P.R.id && x.date === P.date);
+      if(p && !p.cal) await persistPlan(Object.assign({}, p, {cal: true}));
+    }
+  }
+
+  /* ---------- Prep checklist ---------- */
+  const LS_PREP = "jlresy.prep";
+  function prepItems(R){
+    if(R.p === "Phone") return ["Phone charged, with " + R.ph + " ready to dial", "Date, party size and a backup time decided", "Phone clock set to automatic (Settings, General, Date & Time)"];
+    const app = {Resy: "the Resy app", OpenTable: "the OpenTable app", Tock: "Tock", SevenRooms: "SevenRooms"}[R.p] || "the booking page";
+    const items = ["Signed in to " + app, "Card saved on your account"];
+    if(["Resy","OpenTable","Tock"].includes(R.p)) items.push(R.p + " app updated");
+    items.push("Date and party size picked out", "Phone clock set to automatic (Settings, General, Date & Time)");
+    return items;
+  }
+  function prepKey(R, date){ return R.id + "-" + date; }
+  function prepHtml(P){
+    if(P.state === "past") return "";
+    const items = prepItems(P.R), ticks = lsGet(LS_PREP, {})[prepKey(P.R, P.date)] || [];
+    const done = items.filter((_, i) => ticks[i]).length;
+    return '<div class="sec"><h3>Before the drop</h3><p class="note" id="prepCount" style="margin:0 0 4px">' + done + ' of ' + items.length + ' ready' + (P.pingAt != null ? '. Do these by ' + esc(fTime.format(P.pingAt)) + '.' : '.') + '</p><div class="checks">' +
+      items.map((t, i) => '<label><input type="checkbox" data-prep="' + i + '"' + (ticks[i] ? ' checked' : '') + '>' + esc(t) + '</label>').join("") + '</div></div>';
+  }
+
+  /* ---------- Sharing ---------- */
+  let shareMode = false;
+  const fTimeET = new Intl.DateTimeFormat("en-US",{timeZone:NY,hour:"numeric",minute:"2-digit"});
+  function planShareText(R, date, time, party, booked){
+    const lines = [];
+    if(booked){
+      lines.push("We’re booked at " + R.n + "! " + dateStrLabel(date) + " at " + clockLabel(booked.rtime || time) + ", party of " + party + "." + (booked.conf ? " Confirmation " + booked.conf + "." : ""));
+      return lines.join("\n");
+    }
+    const P = computePlan(R, date, time, party), L = bookLink(R, date, party);
+    lines.push("Let’s try for " + R.n + ": " + dateStrLabel(date) + " at " + clockLabel(time) + ", party of " + party + ".");
+    if(P.error){}
+    else if(P.drop.at != null && P.state !== "past") lines.push("Tables open " + fET.format(P.drop.at) + " ET on " + R.p + ". Let’s both try at " + fTimeET.format(P.drop.at) + " sharp. Whoever gets it, text the other so we don’t double-book.");
+    else if(P.drop.at == null) lines.push("Tables open " + fCalLong.format(calDate(P.drop.cal)) + " on " + R.p + "; the exact time isn’t published.");
+    else lines.push("Tables already opened, so let’s both watch " + R.p + " for cancellations.");
+    if(L) lines.push(L.phone ? "Call: " + R.ph : "Book here: " + L.href);
+    return lines.join("\n");
+  }
+  async function shareIt(text){
+    if(navigator.share){
+      try{ await navigator.share({title: "JLResy plan", text}); return; }
+      catch(e){ if(e && e.name === "AbortError") return; }
+    }
+    shareMode = true; calList = [];
+    $("#invTitle").textContent = "Share this plan";
+    $("#invWhat").textContent = "Copy this message and send it to your friends in a text or email.";
+    $("#calChoices").hidden = true; $("#appleHelp").hidden = false;
+    $("#appleHelp .inv-steps").hidden = true;
+    $("#appleAsk").textContent = text;
+    $("#copyAsk").textContent = "Copy message"; $("#invOk").hidden = true;
+    const d = $("#invDlg"); if(!d.open){ if(typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+  }
+
+  /* ---------- Backups ---------- */
+  function backupsFor(P){
+    const now = Date.now(), [y,m,d] = P.date.split("-").map(Number), wd = cal(y,m,d,0).wd;
+    const lim = P.state !== "past" && P.drop.at != null ? P.drop.at + 3600000 : Infinity;
+    return DATA.filter(R => R.id !== P.R.id && R.t && (!R.od || R.od.includes(wd)))
+      .map(R => ({R, d: dropFor(R, P.date)})).filter(x => x.d.at > now && x.d.at <= lim)
+      .sort((a,b) => (isFav(b.R.id) - isFav(a.R.id)) || a.d.at - b.d.at).slice(0, 6);
+  }
+  function backupsHtml(P){
+    const list = backupsFor(P), past = P.state === "past";
+    const title = past ? "Still to come for this night" : "Backups for this night";
+    const intro = past ? "These haven’t opened tables for " + dateStrLabel(P.date) + " yet." : "If " + P.R.n + " is gone, these open tables for " + dateStrLabel(P.date) + " within an hour of it, or earlier. Favorites first.";
+    if(!list.length) return '<div class="sec"><h3>' + esc(title) + '</h3><p class="note">No other drops for this night line up.</p></div>';
+    return '<div class="sec"><h3>' + esc(title) + '</h3><p class="note" style="margin:0 0 4px">' + esc(intro) + '</p><ul class="menu">' + list.map(x =>
+      '<li><div class="info"><div class="line"><span class="rname">' + (isFav(x.R.id) ? '<span class="flag">★</span> ' : '') + esc(x.R.n) + '</span></div><div class="sub">Opens ' + esc(fShort.format(x.d.at)) + ', on ' + esc(x.R.p) + (metaText(x.R) ? '. ' + esc(metaText(x.R)) : '') + '</div></div>' +
+      '<button class="btn sm" type="button" data-plan="' + esc(x.R.id) + '" data-date="' + P.date + '" data-time="' + P.time + '" data-party="' + P.party + '">Plan</button></li>').join("") + '</ul></div>';
+  }
+
+  function openPlanner(R, plan, date, time, party){
+    current = R; editingPlanId = plan ? plan.id : null;
+    $("#dlgName").textContent = R.n;
+    $("#dlgRule").textContent = (metaText(R) ? metaText(R) + ". " : "") + R.p + ", " + ruleText(R);
+    const t = todayNY();
+    $("#pDate").min = iso(cal(t.y,t.m,t.d,0));
+    $("#pDate").value = plan ? plan.date : (date || nextSaturday());
+    $("#pTime").value = plan ? plan.time : (time || "19:30");
+    $("#pParty").value = String(plan ? plan.party : (party || 2));
+    updateDlgStar();
+    renderCard();
+    const dlg = $("#dlg");
+    if(!dlg.open){ if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open",""); }
+    $("#dlg .dlg-body").scrollTop = 0;
+  }
+
+  /* ---------- Plans ---------- */
+  function planDrop(p){ const R = byId[p.rid]; return R ? dropFor(R, p.date) : null; }
+  function planStat(p, d, now){
+    if(p.status) return p.status;
+    return (d.at != null ? now >= d.at : now >= d.dayStart + 864e5) ? "opened" : "upcoming";
+  }
+  function nyLocal(str){ const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(str || ""); return m ? zoned(+m[1],+m[2],+m[3],+m[4],+m[5]) : null; }
+  function planRow(x, k, now){
+    const {p, R, d} = x;
+    const btn = (act, label, cls) => '<button class="btn ' + (cls || "quiet") + ' sm" type="button" data-pact="' + act + '" data-id="' + esc(p.id) + '">' + label + '</button>';
+    let sub, acts;
+    if(k === "upcoming"){
+      sub = esc(clockLabel(p.time) + ', party of ' + p.party + '. ' + (d.at != null ? 'Opens ' + fShort.format(d.at) + '.' : 'Opens ' + fCal.format(calDate(d.cal)) + ', time not published.')) +
+        (d.at != null ? ' <span class="flag" data-at="' + d.at + '">' + esc(rel(d.at - now)) + '</span>' : '') +
+        (d.at != null && !p.cal ? '<br><span class="flag">No calendar reminder yet</span>' : '');
+      acts = btn("open", "Open", "") + (d.at != null ? btn("cal", "Add to calendar") : '') + btn("share", "Share") + btn("del", "Remove");
+    } else if(k === "opened"){
+      sub = esc(clockLabel(p.time) + ', party of ' + p.party + '. Tables opened ' + (d.at != null ? fShort.format(d.at) : fCal.format(calDate(d.cal))) + '.');
+      acts = btn("got", "I got it", "solid") + btn("miss", "Didn’t get it") + btn("open", "Open");
+    } else if(k === "booked"){
+      const bits = ['Booked for ' + clockLabel(p.rtime || p.time) + ', party of ' + p.party + '.'];
+      if(p.conf) bits.push('Confirmation ' + p.conf + '.');
+      const cb = nyLocal(p.cancelBy); if(cb) bits.push('Free cancellation until ' + fShort.format(cb) + '.');
+      sub = esc(bits.join(' '));
+      acts = btn("remind", "Add to calendar", "solid") + btn("share", "Share") + btn("edit", "Edit booking") + btn("del", "Remove");
+    } else {
+      sub = esc(clockLabel(p.time) + ', party of ' + p.party + '.');
+      acts = btn("again", "Try another night") + btn("del", "Remove");
+    }
+    return '<li><div class="info"><div class="line"><span class="rname">' + esc(R.n) + '</span><span class="leader" aria-hidden="true"></span><span class="rule">' + esc(dateStrLabel(p.date)) + '</span></div><div class="sub">' + sub + '</div></div><div class="acts">' + acts + '</div></li>';
+  }
+  function renderPlans(){
+    const now = Date.now();
+    const rows = plans.map(p => ({p, R: byId[p.rid], d: planDrop(p)})).filter(x => x.R && x.d)
+      .sort((a,b) => (a.d.at ?? a.d.dayStart) - (b.d.at ?? b.d.dayStart));
+    const active = rows.filter(x => planStat(x.p, x.d, now) !== "missed");
+    $("#tabP").textContent = "My plans" + (active.length ? " (" + active.length + ")" : "");
+    $("#noPlans").hidden = !!rows.length;
+    renderList();
+    renderDrops();
+    $("#allApple").hidden = !rows.some(x => planStat(x.p, x.d, now) === "upcoming" && x.d.at != null);
+    const sections = [["opened","Tables opened. Did you get one?"],["upcoming","Coming up"],["booked","Booked"],["missed","Didn’t get it"]];
+    $("#plans").innerHTML = sections.map(([k, title]) => {
+      const xs = rows.filter(x => planStat(x.p, x.d, now) === k); if(!xs.length) return "";
+      return '<h3 class="sec-title">' + esc(title) + '</h3><ul class="menu">' + xs.map(x => planRow(x, k, now)).join("") + '</ul>';
+    }).join("");
+  }
+  let gotId = null;
+  function openGot(p){
+    const R = byId[p.rid]; if(!R) return;
+    gotId = p.id;
+    $("#gotTitle").textContent = p.status === "booked" ? "Edit your booking" : "Nice, you got it";
+    $("#gotWhat").textContent = R.n + ", " + dateStrLabel(p.date) + ", party of " + p.party + ".";
+    $("#gotTime").value = p.rtime || p.time;
+    $("#gotConf").value = p.conf || "";
+    $("#gotCancel").value = p.cancelBy || "";
+    const d = $("#gotDlg"); if(!d.open){ if(typeof d.showModal === "function") d.showModal(); else d.setAttribute("open",""); }
+  }
+  function openBookedReminders(p){
+    const R = byId[p.rid]; if(!R) return;
+    const [y,m,d] = p.date.split("-").map(Number);
+    const [hh,mm] = (p.rtime || p.time).split(":").map(Number);
+    const dinner = zoned(y,m,d,hh,mm), morning = zoned(y,m,d,10,0);
+    const events = [{uid: p.id + "-dinner@jlresy", seq: p.seq || 0, start: dinner, end: dinner + 2*3600000,
+      title: "Dinner at " + R.n, location: R.n + (R.nb ? ", " + R.nb : ""),
+      details: "Party of " + p.party + "." + (p.conf ? " Confirmation " + p.conf + "." : ""),
+      alarms: [morning < dinner - 3600000 ? {at: morning, text: "Dinner at " + R.n + " today at " + fTime.format(dinner)} : {rel: "-PT2H", text: "Dinner at " + R.n + " in 2 hours"}]}];
+    const cb = nyLocal(p.cancelBy);
+    if(cb && cb > Date.now()) events.push({uid: p.id + "-cancel@jlresy", seq: p.seq || 0, start: cb - 1800000, end: cb,
+      title: "Last chance to cancel " + R.n + " for free", location: R.p, details: "Free cancellation ends at " + fTime.format(cb) + ".",
+      alarms: [{rel: "-PT24H", text: "Free cancellation for " + R.n + " ends tomorrow"}]});
+    calList = [];
+    $("#invTitle").textContent = "Your booking is on its way to your calendar";
+    $("#invWhat").textContent = R.n + ", " + fShort.format(dinner) + ", party of " + p.party + ".";
+    $("#invGoogle").hidden = true;
+    showInvDlg();
+    downloadEvents(events, R.id + "-" + p.date + "-booking.ics", events.length > 1 ? "It includes the dinner and a reminder before free cancellation ends." : "Check that the dinner shows " + fShort.format(dinner) + ".");
+  }
+  function planAction(act, id){
+    const p = plans.find(x => x.id === id); if(!p) return;
+    const R = byId[p.rid]; if(!R) return;
+    if(act === "open") openPlanner(R, p);
+    else if(act === "cal"){ const P = computePlan(R, p.date, p.time, p.party); if(calOk(P)) openCalendar([P], false, false); }
+    else if(act === "del"){ if(confirm("Remove your plan for " + R.n + " on " + dateStrLabel(p.date) + "?")) removePlan(id); }
+    else if(act === "got" || act === "edit") openGot(p);
+    else if(act === "miss"){ persistPlan(Object.assign({}, p, {status: "missed"})); openPlanner(R, null, p.date, p.time, p.party); }
+    else if(act === "remind") openBookedReminders(p);
+    else if(act === "again") openPlanner(R, null, null, p.time, p.party);
+    else if(act === "share") shareIt(planShareText(R, p.date, p.time, p.party, p.status === "booked" ? {rtime: p.rtime, conf: p.conf} : null));
+  }
+  function savePlansLocal(){ lsSet(LS_PLANS, plans); }
+  async function persistPlan(p){
+    const i = plans.findIndex(x => x.id === p.id);
+    if(i >= 0) plans[i] = p; else plans.push(p);
+    savePlansLocal(); renderPlans();
+    if(col){ try{ const o = Object.assign({}, p); delete o.id; await col.doc(p.id).set(o); }catch(e){ showToast("Couldn’t save to your account, so it’s saved on this device for now."); } }
+  }
+  async function removePlan(id){
+    plans = plans.filter(p => p.id !== id); savePlansLocal(); renderPlans();
+    if(col){ try{ await col.doc(id).delete(); }catch(e){} }
+  }
+
+  /* ---------- Account storage ---------- */
+  async function connectDb(){
+    let tries = 0;
+    while(!(window.claude && window.claude.use) && tries < 20){ await new Promise(r => setTimeout(r,150)); tries++; }
+    if(!(window.claude && window.claude.use)) return;
+    try{
+      const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+      if(!db || !user) return;
+      const uid = await user.id(); if(!uid) return;
+      col = db.collection("data/users/" + uid + "/jlresy/plans");
+      try{
+        setRef = db.doc("data/users/" + uid + "/jlresy/meta/settings");
+        setRef.onSnapshot(snap => {
+          if(snap.metadata && snap.metadata.fromCache && !snap.exists) return;
+          if(snap.exists){ const d = snap.data() || {}; settings.fav = Array.isArray(d.fav) ? d.fav.filter(x => byId[x]) : []; lsSet(LS_SET, settings); renderList(); renderDrops(); updateDlgStar(); }
+          else if(settings.fav.length) saveSettings();
+        }, () => {});
+      }catch(e){ setRef = null; }
+      let checked = false;
+      col.onSnapshot(async snap => {
+        if(!checked){
+          if(snap.metadata.fromCache && snap.empty) return;
+          checked = true;
+          if(snap.empty && plans.length){ for(const p of plans.slice()){ try{ const o = Object.assign({}, p); delete o.id; await col.doc(p.id).set(o); }catch(e){} } return; }
+        }
+        plans = snap.docs.filter(d => d.exists).map(d => Object.assign({}, d.data(), {id: d.id}));
+        savePlansLocal(); renderPlans();
+      }, () => {});
+    }catch(e){}
+  }
+
+  /* ---------- Pings ---------- */
+  function unlockAudio(){ try{ if(!audioCtx){ const AC = window.AudioContext || window.webkitAudioContext; if(AC) audioCtx = new AC(); } if(audioCtx && audioCtx.state === "suspended") audioCtx.resume(); }catch(e){} }
+  function chime(){
+    if(!audioCtx) return;
+    try{ const t0 = audioCtx.currentTime; [880,1318.5].forEach((f,i) => { const o = audioCtx.createOscillator(), g = audioCtx.createGain(); o.frequency.value = f; g.gain.setValueAtTime(0.0001,t0+i*.22); g.gain.exponentialRampToValueAtTime(0.25,t0+i*.22+.02); g.gain.exponentialRampToValueAtTime(0.0001,t0+i*.22+.9); o.connect(g).connect(audioCtx.destination); o.start(t0+i*.22); o.stop(t0+i*.22+1); }); }catch(e){}
+  }
+  function notify(title, body, tag){ try{ if("Notification" in window && Notification.permission === "granted") new Notification(title,{body,tag}); }catch(e){} }
+  function ping(R, p, title, body, tag){ const L = bookLink(R, p.date, p.party); showToast(title + " " + body, L && !L.phone ? L.href : "", true); chime(); notify(title, body, tag); }
+  function checkPings(now){
+    let changed = false;
+    for(const p of plans){
+      if(p.status) continue;
+      const R = byId[p.rid]; if(!R) continue;
+      const d = planDrop(p); if(!d || d.at == null) continue;
+      const k1 = p.id + "|" + d.at + "|pre", k2 = p.id + "|" + d.at + "|live";
+      if(now >= d.at - LEAD && now < d.at && !fired[k1]){ fired[k1] = now; changed = true;
+        ping(R, p, R.n + " opens in " + Math.max(1, Math.round((d.at - now)/60000)) + " min.", "Sign in and set " + dateStrLabel(p.date) + ", party of " + p.party + ".", k1); }
+      if(now >= d.at && now < d.at + 120000 && !fired[k2]){ fired[k2] = now; changed = true;
+        ping(R, p, R.n + " is open now.", "Book " + dateStrLabel(p.date) + " at " + clockLabel(p.time) + ".", k2); }
+    }
+    if(changed){ const cut = now - 3*864e5; for(const k in fired) if(fired[k] < cut) delete fired[k]; lsSet(LS_FIRED, fired); }
+  }
+  async function turnOnPings(){
+    unlockAudio(); pingsWanted = true; lsSet(LS_PINGS, true);
+    let perm = "unsupported";
+    try{ if("Notification" in window){ perm = Notification.permission; if(perm === "default") perm = await Notification.requestPermission(); } }catch(e){ perm = "denied"; }
+    updatePingBtn(); chime();
+    showToast(perm === "granted" ? "Pings are on. You’ll get a notification and a chime while this page is open." : "Pings are on. Notifications are blocked here, so the page will chime and show a banner while it’s open.");
+  }
+  function updatePingBtn(){
+    const ready = pingsWanted && audioCtx && audioCtx.state === "running";
+    const b = $("#pingBtn"); b.textContent = ready ? "Pings on" : "Turn on pings"; b.classList.toggle("on", !!ready); b.setAttribute("aria-pressed", ready ? "true" : "false");
+  }
+
+  /* ---------- Toast ---------- */
+  let toastTimer = null;
+  function showToast(text, url, alert){
+    const t = $("#toast"), c = $("#toastCard");
+    c.className = "tc" + (alert ? " alert" : "");
+    c.innerHTML = '<p>' + esc(text) + '</p><div class="ta">' + (url ? '<a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">Open booking</a>' : '') + '<button type="button" data-act="dismiss">Dismiss</button></div>';
+    t.hidden = false; clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.hidden = true; }, alert ? 120000 : 6000);
+  }
+
+  /* ---------- Events ---------- */
+  function showTab(which){
+    [["d","#tabD","#panelD"],["r","#tabR","#panelR"],["p","#tabP","#panelP"]].forEach(([k,t,pn]) => { $(t).setAttribute("aria-selected", k === which); $(pn).hidden = k !== which; });
+  }
+  $("#tabD").addEventListener("click", () => { renderDrops(); showTab("d"); });
+  $("#platD").addEventListener("change", renderDrops);
+  $("#favR").addEventListener("click", () => { const b = $("#favR"); b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); renderList(); });
+  $("#nbR").addEventListener("change", renderList);
+  $("#cuR").addEventListener("change", renderList);
+  $("#dlgStar").addEventListener("click", () => { if(current) toggleFav(current.id); });
+  $("#gotClose").addEventListener("click", () => $("#gotDlg").close());
+  $("#invDlg").addEventListener("close", () => { shareMode = false; $("#appleHelp .inv-steps").hidden = false; });
+  $("#card").addEventListener("change", e => {
+    const c = e.target.closest("[data-prep]"); if(!c || !current) return;
+    const all = lsGet(LS_PREP, {}), boxes = [...document.querySelectorAll("#card [data-prep]")];
+    all[prepKey(current, $("#pDate").value)] = boxes.map(b => b.checked);
+    const t = todayNY(), today = iso(cal(t.y,t.m,t.d,0));
+    for(const k of Object.keys(all)) if(k.slice(-10) < today) delete all[k];
+    lsSet(LS_PREP, all);
+    const el = $("#prepCount"); if(el) el.textContent = el.textContent.replace(/^\d+ of \d+/, boxes.filter(b => b.checked).length + " of " + boxes.length);
+  });
+  $("#gotSave").addEventListener("click", async () => {
+    const p = plans.find(x => x.id === gotId); if(!p) return;
+    const np = Object.assign({}, p, {status: "booked", rtime: $("#gotTime").value || p.time, conf: $("#gotConf").value.trim().slice(0, 60), cancelBy: $("#gotCancel").value || ""});
+    $("#gotDlg").close();
+    await persistPlan(np);
+    openBookedReminders(np);
+  });
+  $("#mineD").addEventListener("change", renderDrops);
+  $("#tabR").addEventListener("click", () => showTab("r"));
+  $("#tabP").addEventListener("click", () => { renderPlans(); showTab("p"); });
+  $("#search").addEventListener("input", renderList);
+  $("#pingBtn").addEventListener("click", turnOnPings);
+  ["pDate","pTime","pParty"].forEach(id => $("#" + id).addEventListener("input", renderCard));
+  $("#closeBtn").addEventListener("click", () => $("#dlg").close());
+  $("#calBtn").addEventListener("click", () => { if(calOk(cardPlan)) openCalendar([cardPlan], false, false); });
+  $("#invDone").addEventListener("click", () => $("#invDlg").close());
+  $("#invApple").addEventListener("click", () => { if(calList.length) downloadDrops(calList); });
+  $("#invGoogle").addEventListener("click", () => {
+    const P = calList[0]; if(!P) return;
+    $("#calChoices").hidden = true;
+    markCal(calList);
+    $("#invOk").textContent = "Google Calendar opened in a new tab. Check that the event starts at " + fShort.format(P.pingAt) + ", 15 minutes before tables open, then tap Save.";
+    $("#invOk").hidden = false;
+  });
+  $("#copyAsk").addEventListener("click", async () => {
+    const txt = $("#appleAsk").textContent;
+    let ok = false;
+    try{ await navigator.clipboard.writeText(txt); ok = true; }catch(e){}
+    if(!ok){ try{ const r = document.createRange(); r.selectNodeContents($("#appleAsk")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); ok = document.execCommand("copy"); }catch(e){} }
+    $("#copyAsk").textContent = ok ? "Copied" : "Copy message";
+    if(ok) markCal(calList);
+    $("#invOk").textContent = ok ? (shareMode ? "Copied. Paste it into a text or email to your friends." : "Copied.") : "Couldn’t copy automatically. Press and hold the message above, tap Select All, then Copy.";
+    $("#invOk").hidden = false;
+  });
+  $("#allApple").addEventListener("click", () => {
+    const list = plans.map(p => byId[p.rid] ? computePlan(byId[p.rid], p.date, p.time, p.party) : null).filter(calOk).sort((a,b) => a.drop.at - b.drop.at);
+    if(list.length) openCalendar(list, false, true);
+  });
+  $("#saveBtn").addEventListener("click", async () => {
+    const R = current; if(!R) return;
+    unlockAudio();
+    const P = computePlan(R, $("#pDate").value, $("#pTime").value || "19:30", +$("#pParty").value || 2);
+    if(P.error || P.state === "past") return;
+    const dup = plans.find(p => p.id !== editingPlanId && p.rid === R.id && p.date === P.date);
+    const id = editingPlanId || (dup && dup.id) || (R.id + "-" + P.date);
+    const prev = plans.find(p => p.id === id);
+    const changed = prev && (prev.date !== P.date || prev.time !== P.time || prev.party !== P.party);
+    const seq = prev ? (prev.seq || 0) + (changed ? 1 : 0) : 0;
+    await persistPlan({id, rid: R.id, date: P.date, time: P.time, party: P.party, seq, created: prev ? (prev.created || Date.now()) : Date.now()});
+    if(calOk(P)){ openCalendar([P], true, false); updatePingBtn(); return; }
+    $("#dlg").close();
+    showToast(P.pingAt != null ? "Saved. You’ll get a ping at " + fShort.format(P.pingAt) + " if this page is open." : "Saved. Check " + R.p + " the day before; this drop time isn’t published.");
+    if(!pingsWanted) setTimeout(() => showToast("Turn on pings at the top so the page can alert you."), 6500);
+    updatePingBtn();
+  });
+  document.addEventListener("click", e => {
+    const fv = e.target.closest("[data-fav]");
+    if(fv){ toggleFav(fv.dataset.fav); return; }
+    const pa = e.target.closest("[data-pact]");
+    if(pa){ unlockAudio(); planAction(pa.dataset.pact, pa.dataset.id); return; }
+    const pl = e.target.closest("[data-plan]");
+    if(pl){ unlockAudio(); const R = byId[pl.dataset.plan]; if(R) openPlanner(R, null, pl.dataset.date, pl.dataset.time, pl.dataset.party); return; }
+    const op = e.target.closest("[data-open]");
+    if(op){ const p = plans.find(x => x.id === op.dataset.open); if(p && byId[p.rid]) openPlanner(byId[p.rid], p); return; }
+    const cb = e.target.closest("[data-cal]");
+    if(cb){ const p = plans.find(x => x.id === cb.dataset.cal); const R = p && byId[p.rid]; if(R){ const P = computePlan(R, p.date, p.time, p.party); if(calOk(P)) openCalendar([P], false, false); } return; }
+    const dl = e.target.closest("[data-del]");
+    if(dl){ removePlan(dl.dataset.del); return; }
+    const act = e.target.closest("[data-act]");
+    if(act && act.dataset.act === "dismiss") $("#toast").hidden = true;
+    if(act && act.dataset.act === "remindAll"){ const list = needsReminder(); if(list.length) openCalendar(list, false, true); }
+    if(act && act.dataset.act === "share" && current){ shareIt(planShareText(current, $("#pDate").value, $("#pTime").value || "19:30", +$("#pParty").value || 2, null)); }
+  });
+  document.addEventListener("pointerdown", () => { if(pingsWanted){ unlockAudio(); setTimeout(updatePingBtn, 50); } }, {passive:true});
+
+  $("#pParty").innerHTML = Array.from({length:10},(_,i) => '<option value="' + (i+1) + '">' + (i+1) + '</option>').join("");
+  const opts = (vals) => vals.map(v => '<option value="' + esc(v) + '">' + esc(v) + '</option>').join("");
+  $("#nbR").innerHTML += opts([...new Set(DATA.map(R => R.nb).filter(Boolean))].sort());
+  $("#cuR").innerHTML += opts([...new Set(DATA.map(R => R.cu).filter(Boolean))].sort());
+  $("#platD").innerHTML += [...new Set(DATA.map(R => R.p))].sort().map(p => '<option value="' + esc(p) + '">' + esc(p) + '</option>').join("");
+  renderList(); renderPlans(); updatePingBtn();
+  let lastMin = 0;
+  setInterval(() => {
+    const now = Date.now();
+    checkPings(now);
+    document.querySelectorAll("[data-at]").forEach(el => { el.textContent = rel(+el.dataset.at - now); });
+    if(now - lastMin > 60000){ lastMin = now; renderPlans(); if($("#dlg").open) renderCard(); }
+  }, 1000);
+})();
+</script>
+</body>
+</html>
