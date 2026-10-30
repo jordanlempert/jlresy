@@ -138,6 +138,10 @@ dialog.mini{height:fit-content;max-width:440px;width:calc(100% - 32px);border-ra
 .choices{display:grid;gap:8px;margin:16px 0 0}
 .choices .btn{width:100%}
 #invWhat{margin:10px 0 0;font-weight:500}
+.linkbtn{display:inline-block;margin-top:10px;color:var(--gold);font-weight:500;text-decoration:underline;text-underline-offset:3px;padding:8px 0}
+.calset{display:flex;align-items:center;gap:10px;margin-top:28px}
+.calset label{font-size:14px;color:var(--muted)}
+.calset select{width:auto;min-width:150px;height:42px}
 .tabs{grid-template-columns:repeat(3,1fr)}
 .filters{display:flex;gap:8px;margin:0 0 6px}
 .filters select{height:42px;font-size:15px}
@@ -227,6 +231,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     <p class="empty" id="noPlans">No plans yet. Pick a restaurant, choose a night, and save the plan to get pinged before tables open.</p>
   </section>
 
+  <div class="calset"><label for="calPref">Calendar</label><select id="calPref"><option value="apple">Apple</option><option value="google">Google</option><option value="ask">Ask me</option></select></div>
   <p class="foot">Schedules compiled October 28, 2026 from SnagRes, The Infatuation and Resy. Restaurants change their rules, so check the booking page if a time looks off. Pings work while this page is open. Add plans to your calendar to get alerts when it’s closed. Your plans and favorites are saved in this browser, so plan on the phone where you want the alerts.</p>
 </main>
 
@@ -270,6 +275,13 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
       <button class="btn solid" type="button" id="copyAsk" style="width:100%">Copy message</button>
     </div>
     <p class="ok" id="invOk" role="status" hidden></p>
+    <div id="cfBox" hidden>
+      <div class="choices">
+        <button class="btn solid" type="button" id="cfYes">Yes, it’s added</button>
+        <button class="btn" type="button" id="cfRetry">Try again</button>
+      </div>
+      <a class="linkbtn" id="cfGoogle" target="_blank" rel="noopener noreferrer">Use Google Calendar instead</a>
+    </div>
     <button class="btn" type="button" id="invDone">Done</button>
   </div>
 </dialog>
@@ -516,7 +528,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     card.className = "card" + (P.state === "past" ? " past" : "");
     card.innerHTML = '<div class="ticket">' + head + facts + '</div>' + bookHtml(R, P) + warns + prepHtml(P) + steps + backupsHtml(P) + backup + '<button class="btn bigbtn" type="button" data-act="share">Share this plan with friends</button>' + srcs;
     save.disabled = P.state === "past";
-    save.textContent = (editingPlanId ? "Update plan" : "Save plan") + (calOk(P) ? " and add to calendar" : "");
+    save.textContent = calOk(P) ? (editingPlanId ? "Update and add to calendar" : "Save and add to calendar") : (editingPlanId ? "Update plan" : "Save plan");
     cardPlan = P;
     calBtn.hidden = !calOk(P);
   }
@@ -608,7 +620,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const text = icsFile(events);
     lastFile = {text, filename};
     sendFile(text, filename);
-    $("#calChoices").hidden = true; $("#appleHelp").hidden = true;
+    $("#calChoices").hidden = true; $("#appleHelp").hidden = true; $("#cfBox").hidden = true;
     $("#invOk").textContent = (isIOS ? "The invite opened in a new tab. Tap Add to Calendar" + (events.length > 1 ? " (or Add All)." : ".") : "Calendar invite downloaded. Open " + filename + " from your Downloads to add it.") + " " + check;
     $("#invOk").hidden = false;
   }
@@ -628,11 +640,71 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const P = list[0], one = list.length === 1;
     $("#invTitle").textContent = saved ? "Plan saved" : (one ? "Add to calendar" : "Add all to calendar");
     $("#invWhat").textContent = one ? P.R.n + " reservations open " + fShort.format(P.drop.at) + "." : list.length + " upcoming drops.";
-    $("#calChoices").hidden = false; $("#appleHelp").hidden = true; $("#invOk").hidden = true;
+    $("#calChoices").hidden = false; $("#appleHelp").hidden = true; $("#invOk").hidden = true; $("#cfBox").hidden = true;
     $("#invGoogle").hidden = !one;
     if(one) $("#invGoogle").href = googleUrl(P);
     showInvDlg();
     if(appleOnly) downloadDrops(list);
+  }
+
+  /* ---------- One-tap calendar ---------- */
+  const LS_CALPREF = "jlresy.calpref", LS_CALMETHOD = "jlresy.calmethod";
+  function calPref(){ const v = lsGet(LS_CALPREF, null); return ["apple","google","ask"].includes(v) ? v : (isIOS ? "apple" : "ask"); }
+  const METHODS = ["nav", "open", "data"];
+  function methodOrder(){ const m = lsGet(LS_CALMETHOD, null); return METHODS.includes(m) ? [m].concat(METHODS.filter(x => x !== m)) : METHODS.slice(); }
+  let lastCal = null;
+  // Opens Apple's "Add to Calendar" sheet. Must run inside the tap, before any await.
+  function openAppleSheet(text, attempt){
+    const method = methodOrder()[attempt % METHODS.length];
+    const dataUrl = "data:text/calendar;charset=utf-8," + encodeURIComponent(text);
+    let url = null, blocked = false;
+    if(method !== "data"){ try{ url = URL.createObjectURL(new Blob([text], {type: "text/calendar;charset=utf-8"})); }catch(e){} }
+    try{
+      if(method === "nav") window.location.href = url || dataUrl;
+      else if(method === "open"){ const w = window.open(url || dataUrl, "_blank"); if(!w) blocked = true; }
+      else window.location.href = dataUrl;
+    }catch(e){ blocked = true; }
+    if(url) setTimeout(() => URL.revokeObjectURL(url), 120000);
+    return {method, blocked};
+  }
+  function showConfirm(title, msg, googleP, blocked){
+    $("#invTitle").textContent = title;
+    $("#invWhat").textContent = msg;
+    $("#calChoices").hidden = true; $("#appleHelp").hidden = true; $("#invOk").hidden = true;
+    $("#cfBox").hidden = false;
+    $("#cfYes").hidden = !!blocked;
+    $("#cfRetry").textContent = blocked ? "Tap here to add it" : "Try again";
+    const g = $("#cfGoogle");
+    g.hidden = !googleP;
+    if(googleP) g.href = googleUrl(googleP);
+    showInvDlg();
+  }
+  function appleAdd(list, saved, attempt){
+    const one = list.length === 1, P = list[0];
+    const text = icsFile(list.map(x => dropEvent(x)));
+    const r = openAppleSheet(text, attempt);
+    lastCal = {kind: "apple", list, saved, text, attempt, method: r.method};
+    calList = list;
+    showConfirm(saved ? "Plan saved" : "Add to calendar",
+      r.blocked ? "Your phone blocked the calendar. Tap here to add it."
+        : one ? "Added? Your alert is set for " + fShort.format(P.pingAt) + "." : "Added? Each drop has an alert 15 minutes before and another when tables open.",
+      one ? P : null, r.blocked);
+  }
+  function googleAdd(P, saved){
+    window.open(googleUrl(P), "_blank");
+    lastCal = {kind: "google", list: [P], saved};
+    calList = [P];
+    showConfirm(saved ? "Plan saved" : "Add to calendar", "Added? In Google Calendar, check the event starts at " + fShort.format(P.pingAt) + ", then tap Save.", null, false);
+  }
+  // Everywhere a calendar is offered goes through here, so the setting is respected.
+  function addToCalendar(list, saved){
+    if(!list.length) return;
+    const pref = calPref();
+    calList = list;
+    if(pref === "ask") return openCalendar(list, saved, false);
+    if(pref === "google" && list.length === 1) return googleAdd(list[0], saved);
+    if(isIOS) return appleAdd(list, saved, 0);
+    return openCalendar(list, saved, true);
   }
 
   /* ---------- Booking links ---------- */
@@ -895,6 +967,12 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     $("#invTitle").textContent = "Your booking is on its way to your calendar";
     $("#invWhat").textContent = R.n + ", " + fShort.format(dinner) + ", party of " + p.party + ".";
     $("#invGoogle").hidden = true;
+    if(isIOS && calPref() !== "ask"){
+      const text = icsFile(events), r = openAppleSheet(text, 0);
+      lastCal = {kind: "booked", list: [], text, attempt: 0, method: r.method};
+      showConfirm("Add your booking to your calendar", r.blocked ? "Your phone blocked the calendar. Tap here to add it." : events.length > 1 ? "Added? It includes the dinner and a reminder before free cancellation ends." : "Added? Check that the dinner shows " + fShort.format(dinner) + ".", null, r.blocked);
+      return;
+    }
     showInvDlg();
     downloadEvents(events, R.id + "-" + p.date + "-booking.ics", events.length > 1 ? "It includes the dinner and a reminder before free cancellation ends." : "Check that the dinner shows " + fShort.format(dinner) + ".");
   }
@@ -902,7 +980,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const p = plans.find(x => x.id === id); if(!p) return;
     const R = byId[p.rid]; if(!R) return;
     if(act === "open") openPlanner(R, p);
-    else if(act === "cal"){ const P = computePlan(R, p.date, p.time, p.party); if(calOk(P)) openCalendar([P], false, false); }
+    else if(act === "cal"){ const P = computePlan(R, p.date, p.time, p.party); if(calOk(P)) addToCalendar([P], false); }
     else if(act === "del"){ if(confirm("Remove your plan for " + R.n + " on " + dateStrLabel(p.date) + "?")) removePlan(id); }
     else if(act === "got" || act === "edit") openGot(p);
     else if(act === "miss"){ persistPlan(Object.assign({}, p, {status: "missed"})); openPlanner(R, null, p.date, p.time, p.party); }
@@ -1022,7 +1100,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const p = plans.find(x => x.id === gotId); if(!p) return;
     const np = Object.assign({}, p, {status: "booked", rtime: $("#gotTime").value || p.time, conf: $("#gotConf").value.trim().slice(0, 60), cancelBy: $("#gotCancel").value || ""});
     $("#gotDlg").close();
-    await persistPlan(np);
+    persistPlan(np);
     openBookedReminders(np);
   });
   $("#mineD").addEventListener("change", renderDrops);
@@ -1032,9 +1110,31 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   $("#pingBtn").addEventListener("click", turnOnPings);
   ["pDate","pTime","pParty"].forEach(id => $("#" + id).addEventListener("input", renderCard));
   $("#closeBtn").addEventListener("click", () => $("#dlg").close());
-  $("#calBtn").addEventListener("click", () => { if(calOk(cardPlan)) openCalendar([cardPlan], false, false); });
+  $("#calBtn").addEventListener("click", () => { if(calOk(cardPlan)) addToCalendar([cardPlan], false); });
   $("#invDone").addEventListener("click", () => $("#invDlg").close());
-  $("#invApple").addEventListener("click", () => { if(calList.length) downloadDrops(calList); });
+  $("#invApple").addEventListener("click", () => { if(!calList.length) return; if(isIOS) appleAdd(calList, false, 0); else downloadDrops(calList); });
+  $("#cfRetry").addEventListener("click", () => {
+    if(!lastCal) return;
+    if(lastCal.kind === "google") return googleAdd(lastCal.list[0], lastCal.saved);
+    if(lastCal.kind === "apple") return appleAdd(lastCal.list, lastCal.saved, lastCal.attempt + 1);
+    const r = openAppleSheet(lastCal.text, lastCal.attempt + 1);
+    lastCal.attempt++; lastCal.method = r.method;
+    $("#invWhat").textContent = r.blocked ? "Your phone blocked the calendar. Tap here to add it." : "Added? Check that the dinner is in your calendar.";
+    $("#cfYes").hidden = r.blocked; $("#cfRetry").textContent = r.blocked ? "Tap here to add it" : "Try again";
+  });
+  $("#cfYes").addEventListener("click", () => {
+    if(lastCal && lastCal.method) lsSet(LS_CALMETHOD, lastCal.method);
+    if(lastCal && lastCal.list && lastCal.list.length) markCal(lastCal.list);
+    $("#invDlg").close();
+  });
+  $("#cfGoogle").addEventListener("click", () => {
+    const P = calList[0]; if(!P) return;
+    lastCal = {kind: "google", list: [P], saved: false};
+    $("#cfGoogle").hidden = true;
+    $("#invWhat").textContent = "Added? In Google Calendar, check the event starts at " + fShort.format(P.pingAt) + ", then tap Save.";
+  });
+  $("#calPref").value = calPref();
+  $("#calPref").addEventListener("change", e => lsSet(LS_CALPREF, e.target.value));
   $("#invGoogle").addEventListener("click", () => {
     const P = calList[0]; if(!P) return;
     $("#calChoices").hidden = true;
@@ -1054,7 +1154,7 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
   });
   $("#allApple").addEventListener("click", () => {
     const list = plans.map(p => byId[p.rid] ? computePlan(byId[p.rid], p.date, p.time, p.party) : null).filter(calOk).sort((a,b) => a.drop.at - b.drop.at);
-    if(list.length) openCalendar(list, false, true);
+    if(list.length) addToCalendar(list, false);
   });
   $("#saveBtn").addEventListener("click", async () => {
     const R = current; if(!R) return;
@@ -1066,8 +1166,8 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const prev = plans.find(p => p.id === id);
     const changed = prev && (prev.date !== P.date || prev.time !== P.time || prev.party !== P.party);
     const seq = prev ? (prev.seq || 0) + (changed ? 1 : 0) : 0;
-    await persistPlan({id, rid: R.id, date: P.date, time: P.time, party: P.party, seq, created: prev ? (prev.created || Date.now()) : Date.now()});
-    if(calOk(P)){ openCalendar([P], true, false); updatePingBtn(); return; }
+    persistPlan({id, rid: R.id, date: P.date, time: P.time, party: P.party, seq, created: prev ? (prev.created || Date.now()) : Date.now()});
+    if(calOk(P)){ addToCalendar([P], true); updatePingBtn(); return; }
     $("#dlg").close();
     showToast(P.pingAt != null ? "Saved. You’ll get a ping at " + fShort.format(P.pingAt) + " if this page is open." : "Saved. Check " + R.p + " the day before; this drop time isn’t published.");
     if(!pingsWanted) setTimeout(() => showToast("Turn on pings at the top so the page can alert you."), 6500);
@@ -1083,12 +1183,12 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     const op = e.target.closest("[data-open]");
     if(op){ const p = plans.find(x => x.id === op.dataset.open); if(p && byId[p.rid]) openPlanner(byId[p.rid], p); return; }
     const cb = e.target.closest("[data-cal]");
-    if(cb){ const p = plans.find(x => x.id === cb.dataset.cal); const R = p && byId[p.rid]; if(R){ const P = computePlan(R, p.date, p.time, p.party); if(calOk(P)) openCalendar([P], false, false); } return; }
+    if(cb){ const p = plans.find(x => x.id === cb.dataset.cal); const R = p && byId[p.rid]; if(R){ const P = computePlan(R, p.date, p.time, p.party); if(calOk(P)) addToCalendar([P], false); } return; }
     const dl = e.target.closest("[data-del]");
     if(dl){ removePlan(dl.dataset.del); return; }
     const act = e.target.closest("[data-act]");
     if(act && act.dataset.act === "dismiss") $("#toast").hidden = true;
-    if(act && act.dataset.act === "remindAll"){ const list = needsReminder(); if(list.length) openCalendar(list, false, true); }
+    if(act && act.dataset.act === "remindAll"){ const list = needsReminder(); if(list.length) addToCalendar(list, false); }
     if(act && act.dataset.act === "share" && current){ shareIt(planShareText(current, $("#pDate").value, $("#pTime").value || "19:30", +$("#pParty").value || 2, null)); }
   });
   document.addEventListener("pointerdown", () => { if(pingsWanted){ unlockAudio(); setTimeout(updatePingBtn, 50); } }, {passive:true});
@@ -1106,6 +1206,31 @@ input[type=datetime-local]{display:block;width:100%;height:48px;margin:0;font:in
     document.querySelectorAll("[data-at]").forEach(el => { el.textContent = rel(+el.dataset.at - now); });
     if(now - lastMin > 60000){ lastMin = now; renderPlans(); if($("#dlg").open) renderCard(); }
   }, 1000);
+  if(new URLSearchParams(location.search).has("test")) window.__jlresyTest = {DATA, dropFor, dropEvent, icsFile, LEAD};
+})();
+</script>
+<script>
+/* Self-test: open the site with ?test at the end of the address. */
+(function(){
+  if(!new URLSearchParams(location.search).has("test")) return;
+  const T = window.__jlresyTest; if(!T) return;
+  const enc = new TextEncoder(), out = []; let pass = 0, fail = 0;
+  const check = (ok, msg) => { ok ? pass++ : fail++; out.push((ok ? "PASS  " : "FAIL  ") + msg); };
+  const R = T.DATA.find(r => r.n === "Carbone");
+  const drop = T.dropFor(R, "2026-12-05");
+  const P = {R, date: "2026-12-05", time: "19:30", party: 2, drop, pingAt: drop.at - T.LEAD, state: "future"};
+  const ics = T.icsFile([T.dropEvent(P)]);
+  check(ics.includes("\r\nDTSTART:20261105T150000Z\r\n"), "Carbone Dec 5: DTSTART 20261105T150000Z");
+  check(ics.includes("TRIGGER:-PT15M") && ics.includes("TRIGGER:PT0M"), "Both alarms present");
+  check(ics.endsWith("\r\n") && !/[^\r]\n|\r[^\n]/.test(ics), "Every line ends in CRLF");
+  const longest = Math.max(...ics.split("\r\n").slice(0, -1).map(l => enc.encode(l).length));
+  check(longest <= 75, "Longest line " + longest + " bytes (max 75)");
+  out.unshift("JLResy self-test: " + pass + " passed, " + fail + " failed\n");
+  const pre = document.createElement("pre");
+  pre.style.cssText = "position:fixed;left:0;right:0;bottom:0;max-height:50vh;overflow:auto;margin:0;padding:12px 16px;background:#111;color:#eee;font:12px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;z-index:30";
+  pre.textContent = out.join("\n") + "\n\n" + ics.replace(/\r\n/g, "\n");
+  document.body.appendChild(pre);
+  console.log(pre.textContent);
 })();
 </script>
 </body>
